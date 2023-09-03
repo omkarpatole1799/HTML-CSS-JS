@@ -1,0 +1,156 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+p {
+    margin-bottom: 0px;
+}
+.container {
+    border: 2px dotted black;
+    max-width: 700px;
+    margin: 0 auto;
+}
+.container h2 {
+    text-align: center;
+    background-color: #e3d0d0;
+    padding: 15px;
+    position: relative;
+}
+.container h2::after {
+    content: "SALE";
+    text-transform: uppercase;
+    position: absolute;
+    left: -42px;
+    top: 10px;
+    background-color: #d0ff00;
+    padding: 4px;
+    letter-spacing: 0.2rem;
+}
+.product-image {
+    width: 80%;
+    height: auto;
+}
+.product-information {
+    margin-bottom: 15px;
+}
+.product-information h3 {
+    font-size: 25px;
+    margin-bottom: 2px;
+}
+.product-information p {
+    text-transform: uppercase;
+    font-size: 10px;
+    color: #777;
+}
+a:link {
+    color: rgb(89, 89, 89);
+}
+a:hover {
+    text-decoration: none;
+}
+.product-description {
+    margin-bottom: 15px;
+}
+.product-colors {
+    border: 1px dotted blue;
+    display: inline-block;
+    padding: 3px;
+    margin-bottom: 12px;
+}
+.color {
+    width: 15px;
+    height: 15px;
+}
+.product-colors {
+    width: 10rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+.red {
+    background-color: red;
+}
+.orange {
+    background-color: orange;
+}
+.blue {
+    background-color: blue;
+}
+.green {
+    background-color: green;
+}
+.yellow {
+    background-color: yellow;
+}
+.purple {
+    background-color: purple;
+}
+
+.product-details h4 {
+    margin-bottom: 15px;
+}
+.product-details li {
+    margin-bottom: 15px;
+    margin-left: 15px;
+}
+.add-to-cart-btn {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    color: #fff;
+    background-color: #000;
+}
+.add-to-cart-btn:hover {
+    color: #000;
+    background-color: #fff;
+    border: 1px solid #000;
+}
+
+.inside-container {
+    display: flex;
+    gap: 15px;
+}
+
+.product-image {
+    width: 40%;
+    height: auto;
+}
+
+li {
+    font-size: 13px;
+
+}
+li:last-child {
+    margin-bottom: 0px;
+}
+.product-description p {
+    font-size: 12px;
+}
+
+.product-colors {
+    margin-bottom: 0px;
+}
+.product-about {
+    flex: 1;
+}
+.product-details {
+    flex: 1;
+}
+.product-information {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.product-details {
+    margin-top: 10px;
+}
+
+a:link {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 10px;
+}
