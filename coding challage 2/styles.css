@@ -13,6 +13,16 @@
     text-align: center;
     background-color: #e3d0d0;
     padding: 15px;
+    position: relative;
+}
+.container h2::after {
+    content: "TOP";
+    text-transform: uppercase;
+    position: absolute;
+    right: -25px;
+    top: 10px;
+    background-color: #d0ff00;
+    padding: 4px;
 }
 .product-image {
     width: 30%;
@@ -44,7 +54,7 @@ a:hover {
     margin-bottom: 15px;
 }
 
-.product-details h4{
+.product-details h4 {
     margin-bottom: 15px;
 }
 .product-details li {
@@ -55,11 +65,11 @@ a:hover {
     width: 100%;
     padding: 8px;
     border: none;
-    color: #FFF;
+    color: #fff;
     background-color: #000;
 }
 .add-to-cart-btn:hover {
     color: #000;
-    background-color: #FFF;
+    background-color: #fff;
     border: 1px solid #000;
 }
