@@ -5,6 +5,10 @@ font size system (px)
 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98 */
 :root {
     --image-border-radius: 0.9rem;
+    --main-color: #099268;
+    --main-color-tint: #087f5b;
+    --grey-color: #343a40;
+    --grey-color-tint: #495057;
 }
 * {
     margin: 0px;
@@ -15,6 +19,8 @@ font size system (px)
 body {
     /* margin: 4rem; */
     font-family: "Inter", sans-serif;
+    border-bottom: 10px solid var(--main-color);
+    color: var(--grey-color);
 }
 
 /*  */
@@ -33,7 +39,22 @@ h3 {
 h4 {
     font-size: 24px;
     letter-spacing: 0.25px;
-
+}
+.button {
+    text-decoration: none;
+    color: #fff;
+    background-color: var(--main-color);
+    display: inline-block;
+    border-radius: var(--image-border-radius);
+}
+.button:hover {
+    background-color: var(--main-color-tint);
+}
+.button-big {
+    padding: 16px 32px;
+}
+.button-small {
+    padding: 8px 12px;
 }
 
 section,
@@ -42,6 +63,10 @@ footer {
     letter-spacing: -0.5px;
     line-height: 1.2;
     margin: 2rem auto;
+}
+
+footer {
+    color: var(--grey-color-tint);
 }
 
 .section-1 {
@@ -53,13 +78,14 @@ footer {
     margin-bottom: 4rem;
 }
 .section-1 h1 {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;    
 }
 
 .section-1 p {
     font-size: 20px;
     line-height: 1.7;
     letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
 }
 
 .section-1 img {
@@ -79,8 +105,11 @@ footer {
     column-gap: 10px;
     margin-bottom: 4rem;
 }
+.section-2-el h4 {
+    margin-bottom: 0.5rem;
+}
 .section-2 h3 {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     grid-column: 1/ -1;
     grid-row: 1/2;
 }
@@ -105,22 +134,61 @@ footer {
     border-radius: var(--image-border-radius);
 }
 
+.section-3 h3 {
+    font-size: 24px;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+}
+.section-3 q,
+.section-3 p {
+    font-size: 18px;
+    letter-spacing: 1px;
+    line-height: 1.7;
+}
+.section-3 p {
+    margin-top: 0.5rem;
+}
+.testimonial-section {
+    background-color: var(--main-color);
+    padding: 16px;
+    color: #FFF;
+}
+
 .section-4 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     align-items: center;
     justify-content: center;
-    gap: 2rem;
+    column-gap: 2rem;
+    align-items: start;
 }
 
 .section-4 h3 {
     grid-column: 1 / -1;
     grid-row: 1/2;
+    margin-bottom: 1.5rem;
 }
 
 .section-4 img {
     width: 100%;
     height: auto;
+    border-radius: var(--image-border-radius);
+    margin-bottom: 1rem;
+}
+.section-4 h4 {
+    margin-bottom: 0.5rem;
+    grid-column: 1/ -1;
+    grid-row: 1/2;
+}
+.section-4 p {
+    font-size: 18px;
+    letter-spacing: 1px;
+    line-height: 1.7;
+}
+.chair-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 footer {
