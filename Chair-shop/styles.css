@@ -18,7 +18,7 @@ font size system (px)
 
 body {
     /* margin: 4rem; */
-    font-family: "Inter", sans-serif;
+    font-family: 'Inter', sans-serif;
     border-bottom: 10px solid var(--main-color);
     color: var(--grey-color);
 }
@@ -68,6 +68,18 @@ footer {
 footer {
     color: var(--grey-color-tint);
 }
+li {
+    list-style: none;
+    margin-bottom: 1rem;
+    font-size: 18px;
+    letter-spacing: 1px;
+    line-height: 2rem;
+    display: flex;
+    align-items: center;
+}
+li > span {
+    margin-left: 0.5rem;
+}
 
 .section-1 {
     display: grid;
@@ -78,14 +90,14 @@ footer {
     margin-bottom: 4rem;
 }
 .section-1 h1 {
-    margin-bottom: 1.5rem;    
+    margin-bottom: 1.5rem;
 }
 
 .section-1 p {
     font-size: 20px;
     line-height: 1.7;
     letter-spacing: 0.5px;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 .section-1 img {
@@ -106,7 +118,7 @@ footer {
     margin-bottom: 4rem;
 }
 .section-2-el h4 {
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
 }
 .section-2 h3 {
     margin-bottom: 1.5rem;
@@ -117,6 +129,12 @@ footer {
     font-size: 18px;
     letter-spacing: 1px;
     line-height: 1.7;
+}
+.features-icon {
+    stroke: var(--main-color);
+    width: 32px;
+    height: 32px;
+    margin-bottom: 1rem;
 }
 
 .section-3 {
@@ -137,7 +155,7 @@ footer {
 .section-3 h3 {
     font-size: 24px;
     letter-spacing: 0.5px;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
 }
 .section-3 q,
 .section-3 p {
@@ -151,7 +169,7 @@ footer {
 .testimonial-section {
     background-color: var(--main-color);
     padding: 16px;
-    color: #FFF;
+    color: #fff;
 }
 
 .section-4 {
@@ -176,7 +194,7 @@ footer {
     margin-bottom: 1rem;
 }
 .section-4 h4 {
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
     grid-column: 1/ -1;
     grid-row: 1/2;
 }
@@ -190,7 +208,11 @@ footer {
     justify-content: space-between;
     align-items: center;
 }
-
+.chair-icon {
+    stroke: var(--main-color);
+    height: 24px;
+    width: 24px;
+}
 footer {
     margin-top: 5rem;
 }
