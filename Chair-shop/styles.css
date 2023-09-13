@@ -4,12 +4,13 @@
 font size system (px)
 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98 */
 :root {
-    --image-border-radius: 0.9rem;
+    --image-border-radius: 0.635rem;
     --main-color: #099268;
     --main-color-tint: #087f5b;
     --grey-color: #343a40;
     --grey-color-tint: #495057;
 }
+
 * {
     margin: 0px;
     padding: 0px;
@@ -31,15 +32,18 @@ h1 {
     line-height: 1.19;
     letter-spacing: -0.75px;
 }
+
 h3 {
     font-size: 36px;
     letter-spacing: 0.5px;
     line-height: 1.1;
 }
+
 h4 {
     font-size: 24px;
     letter-spacing: 0.25px;
 }
+
 .button {
     text-decoration: none;
     color: #fff;
@@ -47,12 +51,15 @@ h4 {
     display: inline-block;
     border-radius: 100px;
 }
+
 .button:hover {
     background-color: var(--main-color-tint);
 }
+
 .button-big {
     padding: 16px 32px;
 }
+
 .button-small {
     padding: 8px 12px;
     border-radius: 100px;
@@ -63,12 +70,13 @@ footer {
     max-width: 60rem;
     letter-spacing: -0.5px;
     line-height: 1.2;
-    margin: 2rem auto;
+    margin: 80px auto 96px auto;
 }
 
 footer {
     color: var(--grey-color-tint);
 }
+
 li {
     list-style: none;
     margin-bottom: 1rem;
@@ -78,7 +86,8 @@ li {
     display: flex;
     align-items: center;
 }
-li > span {
+
+li>span {
     margin-left: 0.5rem;
 }
 
@@ -87,18 +96,26 @@ li > span {
     grid-template-columns: 1fr 1fr;
     justify-content: center;
     align-items: center;
-    gap: 4.5rem;
-    margin-bottom: 4rem;
+    column-gap: 4.5rem;
 }
+
 .section-1 h1 {
-    margin-bottom: 1.5rem;
+    margin-top: 16px;
+    margin-bottom: 32px;
+}
+
+.section-1 a {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 0.5px;
 }
 
 .section-1 p {
     font-size: 20px;
     line-height: 1.7;
     letter-spacing: 0.5px;
-    margin-bottom: 1rem;
+    margin-bottom: 24px;
 }
 
 .section-1 img {
@@ -116,26 +133,29 @@ li > span {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     column-gap: 10px;
-    margin-bottom: 4rem;
 }
+
 .section-2-el h4 {
-    margin-bottom: 1rem;
+    margin-bottom: 16px;
 }
+
 .section-2 h3 {
-    margin-bottom: 1.5rem;
     grid-column: 1/ -1;
     grid-row: 1/2;
+    margin-bottom: 48px;
 }
+
 .section-2 p {
     font-size: 18px;
     letter-spacing: 1px;
     line-height: 1.7;
 }
+
 .features-icon {
     stroke: var(--main-color);
     width: 32px;
     height: 32px;
-    margin-bottom: 1rem;
+    margin-bottom: 24px;
 }
 
 .section-3 {
@@ -144,7 +164,6 @@ li > span {
     align-items: center;
     justify-content: center;
     gap: 2rem;
-    margin-bottom: 4rem;
 }
 
 .section-3 img {
@@ -156,17 +175,20 @@ li > span {
 .section-3 h3 {
     font-size: 24px;
     letter-spacing: 0.5px;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
+
 .section-3 q,
 .section-3 p {
     font-size: 18px;
     letter-spacing: 1px;
     line-height: 1.7;
 }
+
 .section-3 p {
     margin-top: 0.5rem;
 }
+
 .testimonial-section {
     background-color: var(--main-color);
     padding: 20px;
@@ -197,27 +219,33 @@ li > span {
     border-bottom-right-radius: 0px;
     margin-bottom: 1rem;
 }
+
 .section-4 h4 {
     margin-bottom: 1rem;
     grid-column: 1/ -1;
     grid-row: 1/2;
 }
+
 .section-4 p {
     font-size: 18px;
     letter-spacing: 1px;
     line-height: 1.7;
 }
+
 .section-4-el {
     box-shadow: 0 6px 25px 0px rgba(0, 0, 0, 0.172);
     border-radius: var(--image-border-radius);
 }
+
 .section-4-el ul,
 .section-4-el h4 {
     margin-left: 1rem;
 }
+
 .section-4-el:hover {
     box-shadow: 0 6px 25px 1px rgba(0, 0, 0, 0.236);
 }
+
 .chair-price {
     display: flex;
     justify-content: space-between;
@@ -225,14 +253,17 @@ li > span {
     margin-left: 1rem;
     margin-bottom: 1rem;
 }
+
 .chair-price a {
     margin-right: 1rem;
 }
+
 .chair-icon {
     stroke: var(--main-color);
     height: 24px;
     width: 24px;
 }
+
 footer {
     margin-top: 5rem;
 }
