@@ -8,12 +8,20 @@ Default 400
 
 --Line height
 Default 1
+Paragraph 1.6
 
 02. Colors
 
-- Primary #e67e22
+- Main 
+#e67e22
+
 - Tints
+Main tint 1 #fdf2e9
+Main tint 2 #fae5d3
+
 - Shades
+Main Shade 1 #cf711f
+
 - Accent 
 - Greys
 #555
