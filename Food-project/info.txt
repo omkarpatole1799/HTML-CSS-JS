@@ -5,6 +5,9 @@
 
 --Font weight
 Default 400
+Medium 500
+Semi-bold 600
+Bold 700
 
 --Line height
 Default 1

@@ -27,10 +27,10 @@ body {
 /* ********************** */
 
 .heading-primary {
-    font-size: 4.4rem;
+    font-size: 5.2rem;
     letter-spacing: -0.5px;
-    line-height: 1;
-    margin-bottom: 3.2rem;
+    line-height: 0.95;
+    margin-bottom: 4.8rem;
 }
 
 .btn {
@@ -41,7 +41,7 @@ body {
 }
 
 .btn-primary {
-    color: #eeeeee;
+    color: #eeeeee !important;
     background-color: var(--main-color);
     transition: all 0.4s;
 }
@@ -53,7 +53,7 @@ body {
 .btn-secondary {
     color: var(--grey-primary);
     box-shadow: inset 0 0 0 2.5px var(--grey-primary);
-    transition: all 0.5s;
+    transition: all 0.3s;
 }
 
 .btn-secondary:hover {
@@ -64,13 +64,72 @@ body {
     margin-right: 2rem;
 }
 
+.container-primary {
+    max-width: 120rem;
+    padding: 0 3.2rem;
+    margin: 0 auto;
+}
+
+.grid {
+    display: grid;
+    gap: 9.6rem;
+}
+
+.grid-col-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-col-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-col-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+/* ********************** */
+/* HEADER */
+/* ********************** */
+.header {
+    height: 9.6rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 8rem;
+    background-color: var(--main-color-tint-1);
+}
+.logo img {
+    height: 2.4rem;
+}
+/* ********************** */
+/* NAVIGATION */
+/* ********************** */
+
+.main-nav {
+}
+
+.main-nav-list {
+    list-style: none;
+    display: flex;
+    gap: 2.4rem;
+}
+.nav-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    font-size: 1.8rem;
+    transition: all 0.3s;
+}
+.nav-link:hover {
+    color: var(--main-color-shade-1);
+}
 /* ********************** */
 /* HERO SECTION */
 /* ********************** */
 
 .section-hero {
     background-color: var(--main-color-tint-1);
-    padding: 3.2rem;
+    padding: 3.2rem 2.4rem 9.6rem 3.2rem;
 }
 
 .hero-section {
@@ -78,7 +137,7 @@ body {
     grid-template-columns: 1fr 1fr;
     gap: 3.2rem;
     align-items: center;
-    max-width: 110rem;
+    max-width: 130rem;
     margin: 0 auto;
 }
 
@@ -86,7 +145,7 @@ body {
     font-size: 2rem;
     letter-spacing: 0.5px;
     line-height: 1.6;
-    margin-bottom: 4.8rem;
+    margin-bottom: 6.4rem;
 }
 
 .hero-img img {
