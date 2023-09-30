@@ -3,12 +3,13 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="./css/styles.css" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
             href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800;900&display=swap"
             rel="stylesheet" />
+        <link rel="stylesheet" href="./css/common_styles.css" />
+        <link rel="stylesheet" href="./css/styles.css" />
         <title>Food Projet</title>
     </head>
     <body>
@@ -22,15 +23,20 @@
                     <li><a class="nav-link" href="#">Section 2</a></li>
                     <li><a class="nav-link" href="#">Section 3</a></li>
                     <li><a class="nav-link" href="#">Section 4</a></li>
-                    <li><a class="nav-link btn btn-primary " href="#">Get your meals</a></li>
+                    <li>
+                        <a class="nav-link btn btn-primary" href="#"
+                            >Get your meals</a
+                        >
+                    </li>
                 </ul>
             </nav>
         </header>
         <main>
             <section class="section-hero">
-                <div class="grid grid-col-2 container-primary grid-align-items-center">
+                <div
+                    class="grid grid-col-2 container-primary grid-align-items-center">
                     <div class="hero-text">
-                        <h1 class="heading-primary">
+                        <h1 class="heading-1">
                             A healthy meal delivered to your door, every single
                             day
                         </h1>
@@ -76,5 +82,72 @@
                 </div>
             </section>
         </main>
+
+        <section class="section-how-works">
+            <div class="container-primary section-how-works-container">
+                <span class="subheading">How it works?</span>
+                <h2 class="heading-2">
+                    Your daily dose of health in 3 simple steps
+                </h2>
+            </div>
+            <div class="container-primary grid grid-col-2 grid-align-items-center">
+                <!-- SCREEN - 01 -->
+                <div>
+                    <span class="works-number">01</span>
+                    <h3 class="heading-3">
+                        Tell us what you like (and what not)
+                    </h3>
+                    <p class="works-text">
+                        Never again waste time thinking about what to eat!
+                        Omnifood AI will create a 100% personalized weekly meal
+                        plan just for you. It makes sure you get all the
+                        nutrients and vitamins you need, no matter what diet you
+                        follow!
+                    </p>
+                </div>
+                <div class="works-img-box">
+                    <img
+                        src="./css/img/app/app-screen-1.png"
+                        alt=""
+                        class="works-img" />
+                </div>
+
+                <!-- SCREEN - 02 -->
+                <div class="works-img-box">
+                    <img
+                        src="./css/img/app/app-screen-2.png"
+                        alt=""
+                        class="works-img" />
+                </div>
+                <div>
+                    <span class="works-number">02</span>
+                    <h3 class="heading-3">Approve your weekly meal plan</h3>
+                    <p class="works-text">
+                        Once per week, approve the meal plan generated for you
+                        by Omnifood AI. You can change ingredients, swap entire
+                        meals, or even add your own recipes.
+                    </p>
+                </div>
+
+                <!-- SCREEN - 03 -->
+                <div>
+                    <span class="works-number">03</span>
+                    <h3 class="heading-3">Receive meals at convenient time</h3>
+                    <p class="works-text">
+                        Never again waste time thinking about what to eat!
+                        Omnifood AI will create a 100% personalized weekly meal
+                        plan just for you. It makes sure you get all the
+                        nutrients and vitamins you need, no matter what diet you
+                        follow!
+                    </p>
+                </div>
+                <div class="works-img-box">
+                    <img
+                        src="./css/img/app/app-screen-3.png"
+                        alt=""
+                        class="works-img" />
+                </div>
+            </div>
+        </section>
     </body>
 </html>
