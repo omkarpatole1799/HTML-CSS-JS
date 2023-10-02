@@ -40,7 +40,6 @@
 
 .section-hero {
     background-color: var(--main-color-tint-1);
-    
 }
 
 .hero-paragraph {
@@ -85,9 +84,8 @@
 /* ********************** */
 /* HOW IT WORKS */
 /* ********************** */
-.section-how-works-container {
-}
-.section-how-works{
+
+.section-how-works {
     margin-top: 9.6rem;
 }
 .subheading {
@@ -109,7 +107,29 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
+
+.works-img-box::before,
+.works-img-box::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+}
+
+.works-img-box::before {
+    background-color: var(--main-color-tint-1);
+    width: 38rem;
+    height: 38rem;
+    z-index: -2;
+}
+.works-img-box::after {
+    background-color: var(--main-color-tint-2);
+    width: 30rem;
+    height: 30rem;
+    z-index: -1;
+}
+
 .works-img {
     width: 35%;
 }
