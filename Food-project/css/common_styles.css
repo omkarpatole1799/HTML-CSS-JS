@@ -11,6 +11,8 @@
     --main-color-tint-2: #fae5d3;
 
     --grey-primary: #555;
+    --grey-tint-1: #888;
+    --grey-tint-2: #aaa;
 }
 html {
     font-size: 62.5%;
@@ -82,7 +84,7 @@ body {
 }
 
 .container-primary {
-    max-width: 130rem;
+    max-width: 120rem;
     padding: 0 3.2rem;
     margin: 0 auto;
 }
@@ -110,4 +112,8 @@ section {
 
 .grid-col-4 {
     grid-template-columns: repeat(4, 1fr);
+}
+
+strong {
+    font-weight: 600;
 }

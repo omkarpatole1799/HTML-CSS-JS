@@ -82,6 +82,31 @@
 }
 
 /* ********************** */
+/* FEATURED IN SECTION */
+/* ********************** */
+.section-featured-in {
+    margin-top: 4.8rem;
+    padding: 0;
+}
+.featured-in-heading {
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 600;
+    color: var(--grey-tint-1);
+    margin-bottom: 2.4rem;
+}
+.logos-box {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.logos-box img {
+    height: 3.2rem;
+    filter: brightness(0%);
+    opacity: 50%;
+}
+
+/* ********************** */
 /* HOW IT WORKS */
 /* ********************** */
 
@@ -138,4 +163,66 @@
     letter-spacing: 0.5px;
     line-height: 1.6;
     margin-bottom: 6.4rem;
+}
+
+/* ********************** */
+/* MEALS */
+/* ********************** */
+.section-meals {
+}
+.meal {
+    box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.075);
+    border-radius: 11px;
+    /* overflow: hidden; */
+    position: relative;
+}
+.meal-image img {
+    width: 100%;
+    border-top-right-radius: 11px;
+    border-top-left-radius: 11px;
+}
+.meal-description {
+    padding: 3.2rem;
+}
+.meal-tags {
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+    position: absolute;
+    top: 2rem;
+    left: 0;
+    transform: translate(-20%, 0);
+
+}
+.tag {
+    background-color: var(--main-color-tint-2);
+    color: var(--grey-primary);
+    padding: 5px 10px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    font-size: 1.4rem;
+    box-shadow: 2.4rem 2.4rem 4.8rem rgba(136, 136, 136, 0.3);
+}
+.meal-title {
+    font-size: 3rem;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    margin-bottom: 3.2rem;
+}
+.meal-details-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+}
+.meal-icon {
+    color: var(--main-color-shade-1);
+    font-size: 3rem;
+}
+.meal-details-item {
+    font-size: 2rem;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
 }
