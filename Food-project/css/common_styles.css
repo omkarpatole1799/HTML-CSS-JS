@@ -33,23 +33,25 @@ body {
 .heading-2,
 .heading-3 {
     color: var(--grey-primary);
-    margin-bottom: 6.9rem;
 }
 
 .heading-1 {
     font-size: 5.2rem;
     letter-spacing: -0.5px;
     line-height: 0.95;
+    margin-bottom: 6.4rem;
 }
 .heading-2 {
     font-size: 4.4rem;
     letter-spacing: -0.4px;
     line-height: 1;
+    margin-bottom: 6.4rem;
 }
 .heading-3 {
     font-size: 3rem;
     letter-spacing: -0.3px;
     line-height: 1.05;
+    margin-bottom: 4.8rem;
 }
 
 .btn {
@@ -77,10 +79,6 @@ body {
 
 .btn-secondary:hover {
     background-color: var(--main-color-tint-2);
-}
-
-.margin-right-sm {
-    margin-right: 2rem;
 }
 
 .container-primary {
@@ -116,4 +114,17 @@ section {
 
 strong {
     font-weight: 600;
+}
+
+/* ************** */
+/* HELPER/SETTING CLASSES */
+/* ************** */
+.margin-right-sm {
+    margin-right: 2rem;
+}
+.margin-bottom-md {
+    margin-bottom: 4.8rem;
+}
+.text-center {
+    text-align: center;
 }

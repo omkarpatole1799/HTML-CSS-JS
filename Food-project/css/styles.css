@@ -170,11 +170,33 @@
 /* ********************** */
 .section-meals {
 }
+/* @keyframes bounceCard {
+    0% {
+        transform: translateY(0) ease-in;
+    }
+    20% {
+        transform: translateY(-1rem) ease-in;
+    }
+    40% {
+        transform: translateY(-2rem) ease-in;
+    }
+    60% {
+        transform: translateY(-1rem) ease-in;
+    }
+    100% {
+        transform: translateY(0) ease-in;
+    }
+} */
 .meal {
     box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.075);
     border-radius: 11px;
     /* overflow: hidden; */
     position: relative;
+    transition: all 0.4s ease;
+}
+.meal:hover {
+    box-shadow: 0 4.8rem 6.4rem rgba(0, 0, 0, 0.2);
+    transform: translateY(-2rem);
 }
 .meal-image img {
     width: 100%;
@@ -192,7 +214,6 @@
     top: 2rem;
     left: 0;
     transform: translate(-20%, 0);
-
 }
 .tag {
     background-color: var(--main-color-tint-2);
@@ -225,4 +246,44 @@
     display: flex;
     align-items: center;
     gap: 1.6rem;
+}
+
+/* ********************** */
+/* diet-list */
+/* ********************** */
+
+.meal-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+}
+.meal-item {
+    display: flex;
+    align-items: center;
+    gap: 1.8rem;
+    font-size: 2rem;
+}
+.meal-item-icon {
+    color: var(--main-color-shade-1);
+    font-weight: bold;
+    font-size: 2.4rem;
+}
+
+.all-recepires-link:link,
+.all-recepires-link:visited {
+    display: inline-block;
+    color: var(--main-color);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+    padding: 2px;
+    transition: all 0.3s;
+}
+.all-recepires-link:hover {
+    color: var(--main-color-shade-1);
+    border-bottom: 1px solid transparent;
+    transform: translateY(-0.3rem);
+}
+.all-recepies {
+    font-size: 1.8rem;
 }
