@@ -249,7 +249,7 @@
 }
 
 /* ********************** */
-/* diet-list */
+/* DIET-LIST */
 /* ********************** */
 
 .meal-list {
@@ -286,4 +286,41 @@
 }
 .all-recepies {
     font-size: 1.8rem;
+}
+
+/* ********************** */
+/* TESTIMONIL SECTION */
+/* ********************** */
+.testimonial-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4.8rem;
+    align-items: center;
+    padding: 1.6rem;
+}
+.testimonil-subheading {
+    margin-bottom: 4.8rem;
+}
+.testimonial-heading-container {
+    grid-column: 1/ -1;
+    grid-row: 1 / 2;
+}
+
+.testimonial-image {
+    width: 25%;
+    margin-bottom: 3.2rem !important;
+    border-radius: 50%;
+}
+.testimonial-text {
+    margin-bottom: 1.2rem;
+}
+.testimonial-text,
+.testimonial-name {
+    font-size: 1.6rem;
+    line-height: 1.6;
+    letter-spacing: 0.5px;
+}
+.testimonial-name {
+    font-style: italic;
+    font-weight: 600;
 }
