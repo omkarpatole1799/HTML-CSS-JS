@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <!-- CUSTOM GOOGLE FONT -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+            rel="stylesheet" />
+
+        <!-- EXTERNAL CSS -->
+        <link rel="stylesheet" href="./styles.css" />
+        <title>Form</title>
+    </head>
+    <body>
+        <section class="section-register-form">
+            <form class="registerForm" autocomplete="off">
+                <h3 class="formHeading">Register Form</h3>
+                <!-- FIRST NAME -->
+                <div class="inputContainer">
+                    <label for="fName">First name</label>
+                    <input type="text" name="fName" id="fName" />
+                </div>
+
+                <!-- LAST NAME -->
+                <div class="inputContainer">
+                    <label for="lName">Last name</label>
+                    <input type="text" name="lName" id="lName" />
+                </div>
+
+                <!-- MOBILE NO -->
+                <div class="inputContainer">
+                    <label for="mobNo">Mobile no</label>
+                    <input type="text" name="mobNo" id="mobNo" />
+                </div>
+
+                <!-- EMAIL ADDRESS -->
+                <div class="inputContainer">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" id="email" />
+                </div>
+
+                <!-- ADDRESS -->
+                <div class="inputContainer addressContainer">
+                    <label for="address">Address</label>
+                    <textarea name="address" id="address"></textarea>
+                </div>
+
+                <!-- GENDER -->
+                <div class="inputContainer genderBox">
+                    <label>Gender</label>
+                    <div class="genderContainer">
+                        <div class="genderInput">
+                            <label for="gender">Male</label>
+                            <input type="radio" name="gender" id="male" />
+                        </div>
+                        <div class="genderInput">
+                            <label for="gender">Female</label>
+                            <input type="radio" name="gender" id="female" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COURSE -->
+                <div class="inputContainer courseBox">
+                    <label>Course</label>
+                    <div class="courseContainer">
+                        <div class="courseInput">
+                            <label for="nodeJsCourse">Node</label>
+                            <input
+                                type="checkbox"
+                                name="nodeJsCourse"
+                                id="nodeJsCourse" />
+                        </div>
+                        <div class="courseInput">
+                            <label for="reactJsCourse">React</label>
+                            <input
+                                type="checkbox"
+                                name="reactJsCourse"
+                                id="reactJsCourse" />
+                        </div>
+                        <div class="courseInput">
+                            <label for="angularCourse">Angular</label>
+                            <input
+                                type="checkbox"
+                                name="angularCourse"
+                                id="angularCourse" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="inputContainer buttonContainer">
+                    <button class="button button-primary" type="submit">
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- FONT AWESOME CDN -->
+        <script
+            src="https://kit.fontawesome.com/d5a016cce2.js"
+            crossorigin="anonymous"></script>
+
+        <!-- EXTERNAL JS  -->
+        <script src="./script.js"></script>
+    </body>
+</html>
