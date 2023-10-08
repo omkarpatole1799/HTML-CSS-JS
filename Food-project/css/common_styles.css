@@ -11,8 +11,10 @@
     --main-color-tint-2: #fae5d3;
 
     --grey-primary: #555;
+    --grey-shade-1: #333;
     --grey-tint-1: #888;
     --grey-tint-2: #aaa;
+    --grey-tint-3: #ebebeb;
 }
 html {
     font-size: 62.5%;
@@ -24,7 +26,9 @@ body {
     font-weight: 400;
     color: var(--grey-primary);
 }
-
+body::-webkit-scrollbar {
+    display: none;
+}
 /* ********************** */
 /* REUSABLE STYLES  */
 /* ********************** */
@@ -87,7 +91,7 @@ body {
     margin: 0 auto;
 }
 section {
-    padding: 3.2rem 2.4rem 9.6rem 3.2rem;
+    padding: 3.2rem 2.4rem 9.6rem 2.4rem;
 }
 
 .grid {
@@ -125,6 +129,35 @@ strong {
 .margin-bottom-md {
     margin-bottom: 4.8rem;
 }
+.margin-top-sm {
+    margin-top: 2.4rem;
+}
 .text-center {
     text-align: center;
+}
+.strike-through {
+    text-decoration: line-through;
+}
+a {
+    display: inline-block;
+}
+/* *********** */
+/* LIST STYLING */
+/* *********** */
+.list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+}
+.list-item {
+    display: flex;
+    align-items: center;
+    gap: 1.8rem;
+    font-size: 2rem;
+}
+.list-item-icon {
+    color: var(--main-color-shade-1);
+    font-weight: bold;
+    font-size: 2.4rem;
 }
