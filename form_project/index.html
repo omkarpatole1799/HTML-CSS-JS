@@ -9,14 +9,15 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
             href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-            rel="stylesheet" />
+            rel="stylesheet"
+        />
 
         <!-- EXTERNAL CSS -->
         <link rel="stylesheet" href="./styles.css" />
         <title>Form</title>
     </head>
     <body>
-        <section class="section-register-form">
+        <section class="section-register-form" >
             <form class="registerForm" autocomplete="off">
                 <h3 class="formHeading">Register Form</h3>
                 <!-- FIRST NAME -->
@@ -34,7 +35,7 @@
                 <!-- MOBILE NO -->
                 <div class="inputContainer">
                     <label for="mobNo">Mobile no</label>
-                    <input type="text" name="mobNo" id="mobNo" />
+                    <input type="text" name="mobNo" id="mobNo" maxlength="10" />
                 </div>
 
                 <!-- EMAIL ADDRESS -->
@@ -69,41 +70,74 @@
                     <label>Course</label>
                     <div class="courseContainer">
                         <div class="courseInput">
-                            <label for="nodeJsCourse">Node</label>
+                            <label for="nodeJsCourse">Node Js</label>
                             <input
                                 type="checkbox"
                                 name="nodeJsCourse"
-                                id="nodeJsCourse" />
+                                id="nodeJsCourse"
+                                value="Node Js"
+                            />
                         </div>
                         <div class="courseInput">
-                            <label for="reactJsCourse">React</label>
+                            <label for="reactJsCourse">React Js</label>
                             <input
                                 type="checkbox"
                                 name="reactJsCourse"
-                                id="reactJsCourse" />
+                                id="reactJsCourse"
+                                value="React Js"
+                            />
                         </div>
                         <div class="courseInput">
                             <label for="angularCourse">Angular</label>
                             <input
                                 type="checkbox"
                                 name="angularCourse"
-                                id="angularCourse" />
+                                id="angularCourse"
+                                value="Angular"
+                            />
                         </div>
                     </div>
                 </div>
 
                 <div class="inputContainer buttonContainer">
-                    <button class="button button-primary" type="submit">
+                    <button
+                        id="form-submit-button"
+                        class="button button-primary"
+                        
+                    >
                         Submit
                     </button>
                 </div>
             </form>
         </section>
 
+        <!-- DETAILS-TABLE -->
+        <section id="section-details-table">
+            <div class="padding">
+                <table class="details-table">
+                    <thead>
+                        <tr>
+                            <th>Sr No</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Mobile No</th>
+                            <th>Email ID</th>
+                            <th>Address</th>
+                            <th>Course</th>
+                            <th>Gender</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body"></tbody>
+                </table>
+            </div>
+        </section>
+
         <!-- FONT AWESOME CDN -->
         <script
             src="https://kit.fontawesome.com/d5a016cce2.js"
-            crossorigin="anonymous"></script>
+            crossorigin="anonymous"
+        ></script>
 
         <!-- EXTERNAL JS  -->
         <script src="./script.js"></script>

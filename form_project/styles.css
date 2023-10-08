@@ -17,7 +17,7 @@ Spacing system (px)
 :root {
     --main-color: #f8dc81;
     --main-color-tint-1: #eff7e1;
-
+    --main-color-tint-2: #fbeab3;
     --grey-color: #333;
     --grey-color-tint-1: #888;
 }
@@ -25,6 +25,7 @@ Spacing system (px)
 html {
     font-size: 62.5%;
 }
+
 body {
     font-family: 'Inter', sans-serif;
     line-height: 1;
@@ -42,21 +43,24 @@ textarea {
     border: none;
     outline: none;
     border-radius: 15px;
-    height: 3rem;
-    padding-left: 1.6rem;
+    height: 4.5rem;
+    font-size: 1.8rem;
+    padding: 0 1.6rem;
     width: 100%;
-    font-weight: 600;
+    font-weight: 500;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.07);
     background-color: #f7fbf0;
     transition: all 0.3s;
 }
+
 textarea {
-    height: 5rem;
+    height: 6rem;
     resize: none;
-    padding-left: 1.6rem;
+    padding: 0 1.6rem;
     padding-top: 6px;
     font-family: 'Inter', sans-serif;
 }
+
 input:focus,
 textarea:focus {
     border: none;
@@ -68,7 +72,7 @@ textarea:focus {
 label {
     font-weight: 700;
     margin-left: 1rem;
-    font-size: 1.2rem;
+    font-size: 1.6rem;
 }
 
 .button {
@@ -80,54 +84,75 @@ label {
     letter-spacing: 0.55px;
     cursor: pointer;
 }
+
 .button-primary {
     background-color: #dfc674;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-    height: 3rem;
+    /* padding: 1.6rem; */
+    height: 4.2rem !important;
     transition: all 0.3s;
 }
+
 .button-primary:hover {
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.18);
     background-color: #c6b067;
+    font-size: 1.6rem;
 }
+
+.delete-button {
+    background-color: #fff;
+    padding: 1.6rem;
+    background-color: #ff6b6b;
+    color: var(--grey-color);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+}
+
+.delete-button:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.18);
+    font-size: 1.8rem;
+}
+
 /* ************ */
 /* REGISTER-FORM */
 /* ************ */
 
-.section-register-form {
-}
 .registerForm {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 2.4rem;
     padding: 2.4rem;
-    margin: 3.2rem auto;
+    margin: 3.2rem auto 8rem auto;
     max-width: 50rem;
     border-radius: 15px;
     background-color: var(--main-color-tint-1);
     box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.18);
 }
+
 .formHeading {
     grid-column: 1 / -1;
     text-align: center;
     font-size: 2.4rem;
     letter-spacing: 0.75px;
 }
+
 .addressContainer {
     grid-column: 1 / -1;
     grid-row: 4 / 5;
 }
+
 .inputContainer {
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
 }
+
 .courseContainer,
 .genderContainer {
     display: flex;
     justify-content: start;
     align-items: center;
-    /* gap: 1.2rem; */
+    gap: 1.2rem;
     margin-top: 0.4rem;
 }
 
@@ -136,16 +161,66 @@ label {
     align-items: center;
     gap: 1rem;
 }
-.genderBox,
-courseBox {
+
+.genderBox {
     grid-column: 1 / -1;
     grid-row: 6 / 7;
+    margin-top: 1.2rem;
 }
+
+.courseBox {
+    grid-column: 1/ -1;
+    margin-top: 1.2rem;
+}
+
 .courseInput {
     display: flex;
     align-items: center;
     gap: 1.2rem;
 }
+
+.genderInput label,
+.courseInput label {
+    font-size: 1.8rem;
+}
+
 .buttonContainer {
     grid-column: 1 / -1;
+}
+
+/* ************ */
+/* DETAILS-TABLE */
+/* ************ */
+
+table {
+    border-collapse: collapse;
+    text-align: center;
+    font-size: 1.8rem;
+    margin: 0 auto;
+}
+
+.padding {
+    padding: 2.4rem;
+    margin: 3.2rem auto 8rem auto;
+    max-width: 110rem;
+    border-radius: 15px;
+    background-color: var(--main-color-tint-1);
+    box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.18);
+}
+
+tr,
+th,
+td {
+    border-bottom: 1px solid #4a4227;
+    padding: 1.2rem;
+    font-weight: 600;
+}
+
+tbody tr {
+    line-height: 3rem !important;
+}
+
+tbody tr:hover {
+    background-color: var(--main-color-tint-2);
+    cursor: pointer;
 }
