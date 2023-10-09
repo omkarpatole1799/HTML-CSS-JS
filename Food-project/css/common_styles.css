@@ -107,6 +107,9 @@ section {
 .grid-align-items-center {
     align-items: center;
 }
+.grid-justify-self-center {
+    justify-self: center;
+}
 
 .grid-col-2 {
     grid-template-columns: repeat(2, 1fr);
@@ -123,6 +126,8 @@ section {
 strong {
     font-weight: 600;
 }
+
+
 
 /* ************** */
 /* HELPER/SETTING CLASSES */
