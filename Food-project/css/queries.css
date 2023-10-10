@@ -1,4 +1,4 @@
-/* 1300px (Desktops) */
+/* 1296px (Desktops) */
 @media (max-width: 81em) {
     html {
         font-size: 56.25%;
@@ -12,18 +12,15 @@
     .heading-3 {
         font-size: 2.4rem;
     }
-    .header {
-        padding: 0 8rem;
-    }
+
+    .header,
     .hero-container {
-        max-width: 115rem;
-    }
-    .hero-img {
-        justify-self: center;
+        max-width: 120rem;
+        padding: 0 3.2rem;
     }
 }
 
-/* 1100px (Tablets Landscape) */
+/* 1088px (Tablets Landscape) */
 @media (max-width: 68em) {
     html {
         font-size: 50%;
@@ -37,28 +34,36 @@
     .heading-3 {
         font-size: 2.4rem;
     }
-    .header {
+    .header,
+    .hero-container {
+        /* max-width: 120rem; */
         padding: 0 3.2rem;
     }
-
-    section {
-        padding: 3.2rem 3.2rem 9.6rem 3.2rem;
-    }
-
     .hero-img {
-        width: 80%;
+        width: 85%;
         justify-self: center;
     }
 
     .meal-title {
         font-size: 2.4rem;
     }
+    .hero-orders {
+        gap: 0.2rem;
+    }
+
+    .gallery-images-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .testimonial-container {
+        grid-template-columns: 1fr;
+    }
 }
 
-/* 875px (Tablets potrait) */
+/* 864px (Tablets potrait) */
 @media (max-width: 54em) {
     .heading-1 {
-        font-size: 3.2rem;
+        font-size: 5.2rem;
+        line-height: 1.1;
         margin-bottom: 4.8rem;
     }
     .heading-2 {
@@ -73,11 +78,63 @@
     .grid-col-2 {
         grid-template-columns: 1fr;
     }
+    .grid {
+        row-gap: 8rem;
+    }
     .hero-text {
         text-align: center;
         padding: 0 3.2rem;
     }
-    .hero-orders{
+    .hero-img {
+        text-align: center;
+    }
+    .hero-img img {
+        width: 60%;
+    }
+    .hero-orders {
         justify-content: center;
+    }
+    .hero-orders {
+        gap: 2.4rem;
+    }
+    .orders-img img {
+        width: 5.2rem;
+        height: 5.2rem;
+    }
+    .orders-text {
+        font-size: 2rem;
+    }
+
+    .featured-in-heading {
+        font-size: 2rem;
+    }
+
+    .logos-box {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        justify-items: center;
+        row-gap: 3.2rem;
+    }
+    .logos-box .logo-box:nth-child(1),
+    .logos-box .logo-box:nth-child(2),
+    .logos-box .logo-box:nth-child(3) {
+        grid-row: 1;
+        grid-column: span 2;
+    }
+
+    .logos-box .logo-box:nth-child(4),
+    .logos-box .logo-box:nth-child(5) {
+        grid-column: span 3;
+    }
+
+    .grid-col-3 {
+        grid-template-columns: 1fr 1fr;
+    }
+    .diet-list {
+        justify-self: center;
+        grid-column: span 2;
+    }
+    .grid-col-4 {
+        grid-template-columns: 1fr 1fr;
     }
 }

@@ -1,13 +1,17 @@
 /* ********************** */
 /* HEADER */
 /* ********************** */
+.section-header {
+    background-color: var(--main-color-tint-1);
+    padding: 3.2rem 0;
+}
 .header {
-    height: 9.6rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 8rem;
-    background-color: var(--main-color-tint-1);
+
+    max-width: 130rem;
+    margin: 0 auto;
 }
 .logo img {
     height: 2.4rem;
@@ -42,6 +46,7 @@
 .section-hero {
     background-color: var(--main-color-tint-1);
 }
+
 .hero-container {
     max-width: 130rem;
     margin: 0 auto;
@@ -412,7 +417,7 @@ li {
     text-align: center;
     margin-top: 2.4rem;
 }
-.plan-details{
+.plan-details {
     margin-bottom: 8rem;
     font-size: 1.6rem;
     font-weight: 500;
@@ -421,7 +426,7 @@ li {
 /* ************ */
 /* FEATURES SECTION */
 /* ************ */
-.section-features{
+.section-features {
     margin-bottom: 0 !important;
 }
 .feature-icon {
