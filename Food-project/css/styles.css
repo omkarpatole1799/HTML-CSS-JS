@@ -6,6 +6,8 @@
     padding: 3.2rem 0;
 }
 .header {
+    position: relative;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -32,6 +34,7 @@
 .nav-link {
     text-decoration: none;
     color: #333;
+    color: var(--grey-tint-1);
     font-weight: 600;
     font-size: 1.8rem;
     transition: all 0.3s;

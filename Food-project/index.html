@@ -21,10 +21,11 @@
                 </div>
                 <nav class="main-nav">
                     <ul class="main-nav-list">
-                        <li><a class="nav-link" href="#">Section 1</a></li>
-                        <li><a class="nav-link" href="#">Section 2</a></li>
-                        <li><a class="nav-link" href="#">Section 3</a></li>
-                        <li><a class="nav-link" href="#">Section 4</a></li>
+                        <li><a class="nav-link" href="#">Omnifood</a></li>
+                        <li><a class="nav-link" href="#">How it works</a></li>
+                        <li><a class="nav-link" href="#">Meals</a></li>
+                        <li><a class="nav-link" href="#">Testimonials</a></li>
+                        <li><a class="nav-link" href="#">Pricing</a></li>
                         <li>
                             <a class="nav-link btn btn-primary" href="#"
                                 >Get your meals</a
@@ -32,6 +33,14 @@
                         </li>
                     </ul>
                 </nav>
+
+                <!-- HAMBURGER MENU FOR MOBILE -->
+                <button class="btn-mobile-nav">
+                    <ion-icon class="menu-icon" name="grid-outline"></ion-icon>
+                    <ion-icon
+                        class="menu-icon"
+                        name="close-circle-outline"></ion-icon>
+                </button>
             </header>
         </section>
         <main>
@@ -671,5 +680,13 @@
         <script
             nomodule
             src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+        <script>
+            let mobileNavBtn = document.querySelector('.btn-mobile-nav')
+            let nav = document.querySelector('.header')
+            mobileNavBtn.addEventListener('click', function () {
+                nav.classList.toggle('nav-open')
+            })
+        </script>
     </body>
 </html>
