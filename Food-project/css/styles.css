@@ -97,10 +97,7 @@
 /* ********************** */
 /* FEATURED IN SECTION */
 /* ********************** */
-.section-featured-in {
-    margin-top: 4.8rem;
-    padding: 0;
-}
+
 .featured-in-heading {
     text-transform: uppercase;
     text-align: center;
@@ -123,17 +120,14 @@
 /* HOW IT WORKS */
 /* ********************** */
 
-.section-how-works {
-    margin-top: 9.6rem;
+.container-how-works {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 4.8rem;
+    row-gap: 9.6rem;
+    align-items: center;
 }
-.subheading {
-    display: inline-block;
-    font-size: 2rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: var(--main-color-shade-1);
-    margin-bottom: 1.6rem;
-}
+
 .works-number {
     display: inline-block;
     color: #ccc;
@@ -175,7 +169,6 @@
     font-size: 2rem;
     letter-spacing: 0.5px;
     line-height: 1.6;
-    margin-bottom: 6.4rem;
 }
 
 /* ********************** */
