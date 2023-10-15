@@ -6,4 +6,7 @@
 
 ## Food app
 
-![Alt text](image.png)
+![Omnifood desktop](https://github.com/omkarpatole1799/HTML-CSS/assets/56589966/87d8af91-a3cf-4a2c-9cb3-8806beb47f3b)
+
+![Omnifood phone](https://github.com/omkarpatole1799/HTML-CSS/assets/56589966/16a76590-f09b-46af-8359-a4be8b20b952)
+
