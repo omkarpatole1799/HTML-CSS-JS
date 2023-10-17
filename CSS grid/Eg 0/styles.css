@@ -1,0 +1,37 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.grid-container {
+  max-width: 80rem;
+  margin: 1.8rem auto;
+  background-color: #ddd;
+}
+.el {
+  border: 1px solid #888;
+}
+
+.el-1 {
+}
+
+.el-2 {
+}
+
+.el-3 {
+}
+
+.el-4 {
+}
+
+.el-5 {
+}
+
+.el-6 {
+}
+
+.el-7 {
+}
+
+.el-8 {
+}
