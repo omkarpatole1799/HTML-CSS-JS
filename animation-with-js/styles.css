@@ -66,3 +66,17 @@ section {
   filter: blur(0);
   background-color: #fff;
 }
+
+/* INFO PARA SECTION */
+
+.info-para {
+  opacity: 0;
+  transform: translateY(50px);
+
+  transition: all 1000ms;
+}
+
+.show-info-para {
+  opacity: 1;
+  transform: translateY(0);
+}
