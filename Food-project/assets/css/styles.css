@@ -7,6 +7,17 @@
 
   transition: all 2s;
 }
+
+.sticky-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  height: 95px;
+  transition: all 2s;
+}
+
 .header {
   position: relative;
 
@@ -43,16 +54,6 @@
 }
 .nav-link:hover {
   color: var(--main-color-shade-1);
-}
-
-.sticky-nav {
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  /* background-color: black; */
-  z-index: 999;
-  height: 90px;
 }
 
 /* ********************** */

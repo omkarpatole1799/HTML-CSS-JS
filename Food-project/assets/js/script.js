@@ -19,8 +19,8 @@ const heroSectionObserver = new IntersectionObserver(
   },
   {
     root: null,
-    rootMargin: '-95px',
-    threshold: 0.2,
+    rootMargin: '0px 0px -95px 0px',
+    threshold: 0.22,
   }
 )
 
