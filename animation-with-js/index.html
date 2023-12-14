@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles.css" />
+
     <title>Animating with js</title>
   </head>
   <body>
@@ -20,14 +21,20 @@
     <section class="list">
       <p class="">Below are some of my projects</p>
       <div class="d-flex justify-content-center align-items-center">
-        <span class="">Project 1</span>
-        <span class="hidden-right">Project 2</span>
+        <span class="left-slide-in">Project 1</span>
+        <span class="left-slide-in">Project 2</span>
+        <span class="right-slide-in">Project 2</span>
+        <span class="right-slide-in">Project 2</span>
+      </div>
+      <div class="d-flex justify-content-center align-items-center">
+        <span class="right-slide-in">Project 2</span>
+        <span class="left-slide-in">Project 1</span>
       </div>
     </section>
 
     <section>
-      <div >
-        <p class="info-para">
+      <div>
+        <p class="bottom-slide-in">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae
           quos asperiores molestiae officia consequuntur. Commodi doloremque vel
           laborum veritatis perspiciatis.
@@ -35,6 +42,17 @@
       </div>
     </section>
 
-    <script src="./script.js"></script>
+    <section>
+      <div>
+        <p class="top-slide-in">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae
+          quos asperiores molestiae officia consequuntur. Commodi doloremque vel
+          laborum veritatis perspiciatis.
+        </p>
+      </div>
+    </section>
+
+    <!-- <script src="./script.js"></script> -->
+    <script src="./animations.js"></script>
   </body>
 </html>

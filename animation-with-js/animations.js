@@ -1,14 +1,13 @@
-
 /**
- * TO USE THIS ANIMATIONS ADD THE CLASSED (i.e.) 
+ * TO USE THIS ANIMATIONS ADD THE CLASSED (i.e.)
  *  .right-slide-in
  *  .left-slide-in
  *  .bottom-slide-in
- *  .top-slide-in  
- * 
+ *  .top-slide-in
+ *
  * BY ADDING THESE CLASSES IT WILL DO THE TRICK! xD
  * NO NEED TO ADD THE CSS STYLES SEPERATEDLY AS THE STYLES ARE GIVEN IN JS ITSELF
- * */ 
+ * */
 
 const rightSlideInEl = document.querySelectorAll('.right-slide-in')
 const leftSlideInEl = document.querySelectorAll('.left-slide-in')
@@ -107,7 +106,7 @@ const topSlideElObserver = new IntersectionObserver(
   },
   {
     root: null,
-    threshold: 0.25,
+    // threshold: 0.5,
   }
 )
 
