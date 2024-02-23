@@ -1,0 +1,42 @@
+* {
+	margin: 0;
+	padding:0;
+	box-sizing: border-box;
+}
+
+body {
+	background-color: #333;
+}
+.container {
+	display: flex;
+	justify-content: center;
+}
+
+.right,
+.left {
+	text-align:center;
+	border: 4px dashed white;
+	color: white;
+	margin: 0.7rem;
+
+	& .el {
+		font-size: 2rem;
+		border: 1px solid whitesmoke;
+		padding: 0.7rem;
+		margin: 0.7rem;
+	}
+}
+
+
+.left {
+	width: 50%;
+	height: 20rem;
+	margin-bottom: 3rem;
+}
+
+.right {
+	width: 50%; 
+	height: 20rem;
+	border-color:aqua;
+
+}
