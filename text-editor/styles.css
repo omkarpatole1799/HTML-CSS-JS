@@ -1,0 +1,31 @@
+* {
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+}
+
+.editor {
+	max-width: 30rem;
+	margin: 1.2rem auto;
+	padding: 0.9rem;
+	border: 2px solid yellowgreen;
+	height: 20rem;
+	width: 30rem;
+
+	font-size: 1.3rem;
+}
+
+.editor:focus {
+	border: 2px solid yellowgreen
+}
+
+.button-container {
+	max-width: 30rem;
+	margin: 0 auto;
+}
+
+.button-container #bold-btn{
+	padding: 0.3em;
+	font-size: 1.4rem;
+
+}
