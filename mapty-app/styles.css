@@ -1,0 +1,131 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #272d30;
+
+  --grey-color: #9f9f9f;
+}
+
+html {
+  font-family: "Montserrat Alternates";
+}
+
+.container {
+  height: 95svh;
+  margin: 20px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.app-box {
+  /* display: flex; */
+}
+
+.activity-list {
+  padding: 1.2rem;
+  width: 25%;
+  height: 100%;
+  background-color: var(--primary-color);
+}
+
+.map {
+  width: 75%;
+  height: 100%;
+  background-color: var(--grey-color);
+}
+
+/* .leaflet-popup {
+  background-color: var(--primary-color);
+  border-left: #272d30;
+} */
+
+.map-popup {
+}
+
+/* Popup width is defined in JS using options */
+.leaflet-popup .leaflet-popup-content-wrapper {
+  background-color: var(--primary-color);
+  color: var(--color-light--2);
+  border-radius: 5px;
+  padding-right: 0.6rem;
+  color: #fff;
+}
+
+.leaflet-popup .leaflet-popup-tip {
+  background-color: var(--primary-color);
+}
+
+/* workout form */
+
+::placeholder {
+  font-weight: 300;
+}
+#work-out-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  color: #fff;
+
+  opacity: 1;
+
+  transform: translateY(0rem);
+
+  transition: 500ms ease-in-out;
+
+  & select,
+  input {
+    padding: 8px;
+    border-radius: 12px;
+    outline: none;
+    border: none;
+
+    font-family: "Montserrat Alternates";
+    font-weight: 600;
+  }
+
+  & select:focus,
+  input:focus {
+    background-color: blanchedalmond;
+  }
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  & button {
+    padding: 8px;
+    border-radius: 12px;
+    border: none;
+    background-color: var(--grey-color);
+    color: #fff;
+
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    transition: 250ms ease-in-out;
+  }
+
+  & button:hover {
+    background-color: blanchedalmond;
+    color: var(--primary-color);
+  }
+}
+
+
+.button-container > button {
+}
+
+#work-out-form.hidden {
+  height: 0;
+  opacity: 0;
+  transform: translateY(-30rem);
+}

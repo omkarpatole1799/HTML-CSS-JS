@@ -1,6 +1,6 @@
 
-console.time('Start')
 function convertDate(date, {seperator='-', originalFormat='yy/mm/dd', reqFormat='dd/mm/yy', reqSeperator='-'}) {
+	console.time("timer");
 	let _date
 	_date = date.split(`${seperator}`)
 	if (originalFormat == 'yy/mm/dd') {
@@ -18,15 +18,30 @@ function convertDate(date, {seperator='-', originalFormat='yy/mm/dd', reqFormat=
 	function dateStrFmt(val0, val1, val2){
 		return `${_date[val0]}${reqSeperator}${_date[val1]}${reqSeperator}${_date[val2]}`
 	}
-	console.timeEnd('End')
+	console.timeEnd("timer");
 	return _date
 
 }
 
 
-console.log(convertDate('20/02/2024',{seperator:'/',originalFormat: 'dd/mm/yy', reqFormat: 'yy/mm/dd', }))
-console.log(convertDate('2024/02/20',{seperator:'/', reqFormat: 'dd/mm/yy'}))
-// 
-console.log(convertDate('20-02-2024',{seperator:'-',originalFormat: 'dd/mm/yy' , reqFormat: 'yy-mm-dd'}))
-console.log(convertDate('2024-02-20',{seperator:'-', reqFormat: 'dd/mm/yy'}))
+let i = 0
+
+while(i < 10000) {
+	console.log(convertDate('20/02/2024',{seperator:'/',originalFormat: 'dd/mm/yy', reqFormat: 'yy/mm/dd', }))
+	i++
+}
+
+// console.log(convertDate('20/02/2024',{seperator:'/',originalFormat: 'dd/mm/yy', reqFormat: 'yy/mm/dd', }))
+// console.log(convertDate('2024/02/20',{seperator:'/', reqFormat: 'dd/mm/yy'}))
+// // 
+// console.log(convertDate('20-02-2024',{seperator:'-',originalFormat: 'dd/mm/yy' , reqFormat: 'yy-mm-dd'}))
+// console.log(convertDate('2024-02-20',{seperator:'-', reqFormat: 'dd/mm/yy'}))
+// console.log(convertDate('2024-02-20',{seperator:'-', reqFormat: 'dd/mm/yy'}))
+// console.log(convertDate('2024-02-20',{seperator:'-', reqFormat: 'dd/mm/yy'}))
+// console.log(convertDate('2024-02-20',{seperator:'-', reqFormat: 'dd/mm/yy'}))
+// console.log(convertDate('2024-02-20',{seperator:'-', reqFormat: 'dd/mm/yy'}))
+// console.log(convertDate('2024-02-20',{seperator:'-', reqFormat: 'dd/mm/yy'}))
+// console.log(convertDate('2024-02-20',{seperator:'-', reqFormat: 'dd/mm/yy'}))
+// console.log(convertDate('2024-02-20',{seperator:'-', reqFormat: 'dd/mm/yy'}))
+// console.log(convertDate('2024-02-20',{seperator:'-', reqFormat: 'dd/mm/yy'}))
 
