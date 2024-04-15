@@ -35,24 +35,37 @@
           <div>
             <label for="">Type</label>
             <select name="work-type" id="work-out-type">
+              <option value="running">Running</option>
               <option value="cycling">Cycling</option>
-              <option value="climbing">Climbing</option>
             </select>
           </div>
 
           <div>
             <label for="">Time</label>
-            <input type="text" id="time" name="time" value="" placeholder="min" />
+            <input
+              type="text"
+              id="time"
+              name="time"
+              value=""
+              placeholder="min"
+            />
           </div>
 
           <div>
             <label for="">Distance</label>
-            <input type="text" name="distance" value="" placeholder="km" />
+            <input type="text" name="distance" value="" placeholder="km" class="_numeric" />
           </div>
 
           <div>
-            <label for="">Cadence</label>
-            <input type="text" name="cadence" placeholder="meters" />
+            <div class="toggle-type">
+              <label for="">Cadence</label>
+              <input type="text" name="cadence" placeholder="steps/min" />
+            </div>
+
+            <div class="toggle-type hidden">
+              <label for="">Elev Gain</label>
+              <input type="text" name="cadence" placeholder="meters" />
+            </div>
           </div>
 
           <div class="button-container">

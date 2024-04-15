@@ -1,20 +1,28 @@
 "use strict";
 const form = document.getElementById("work-out-form");
+const workoutType = document.getElementById("work-out-type");
 const closeForm = document.getElementsByClassName("close-work-out-form-btn");
-
 const time = document.getElementById("time");
 
-class ValidateInputs {
-  constructor() {}
+const _numeric = document.querySelectorAll("._numeric");
 
-  isAlpha(value) {
-    console.log(value, "-in isAlpha");
-    return true;
+class ValidateInputs {
+  constructor() {
+    _numeric.forEach(el => {
+      el.addEventListener("keyup", e => this._isNumeric(el));
+    });
   }
 
-  isNumeric() {}
+  _isAlpha() {}
 
-  isAlphaNumeric() {}
+  _isNumeric(element) {
+    console.log("here");
+    console.log(element);
+    let regEx = /[^0-9]/g;
+    element.value = element.value.replace(regEx, "");
+  }
+
+  _isAlphaNumeric() {}
 }
 
 let validation = new ValidateInputs();
@@ -27,6 +35,7 @@ class App {
     this._getPosition();
     form.addEventListener("submit", this._addNewWorkout.bind(this));
     closeForm[0].addEventListener("click", this._hideWorkoutForm.bind(this));
+    workoutType.addEventListener("change", this._toggleElevationField);
 
     // time.addEventListener("keyup", this._validateTime);
   }
@@ -56,6 +65,13 @@ class App {
     this.#map.on("click", this._showWorkoutForm.bind(this));
   }
 
+  _toggleElevationField() {
+    console.log("changed");
+    document
+      .querySelectorAll(".toggle-type")
+      .forEach(el => el.classList.toggle("hidden"));
+  }
+
   _showWorkoutForm(mapEvent) {
     this.#mapE = mapEvent;
     form.classList.remove("hidden");
@@ -64,6 +80,7 @@ class App {
 
   _hideWorkoutForm() {
     form.classList.add("hidden");
+    form.reset();
   }
 
   _addNewWorkout(e) {
@@ -71,24 +88,30 @@ class App {
 
     let formData = new FormData(form);
 
-    for (let [key, value] of formData) {
-      if (value == "") alert(`Please fill ${key}`);
-    }
+    // for (let [key, value] of formData) {
+    //   if (value == "") return alert(`Please fill ${key}`);
+    // }
+
+    this._renderWorkoutMarker();
+    this._hideWorkoutForm();
+  }
+
+  _renderWorkoutMarker() {
+    const { lat, lng } = this.#mapE.latlng;
+    L.marker([lat, lng])
+      .addTo(this.#map)
+      .bindPopup(
+        L.popup({
+          maxWidth: 250,
+          minWidth: 100,
+          autoClose: false,
+          closeOnClick: false,
+          className: `leaflet-popup`,
+        })
+      )
+      .setPopupContent(`HI popup`)
+      .openPopup();
   }
 }
 
 let app = new App();
-
-// L.marker(mapEvent.latlng)
-//   .addTo(map)
-//   .bindPopup(
-//     L.popup({
-//       maxWidth: 250,
-//       minWidth: 100,
-//       autoClose: false,
-//       closeOnClick: false,
-//       className: `leaflet-popup`,
-//     })
-//   )
-//   .setPopupContent(`HI popup`)
-// .openPopup();
