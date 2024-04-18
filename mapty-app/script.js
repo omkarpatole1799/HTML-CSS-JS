@@ -42,6 +42,7 @@ class Running extends Workout {
     super(coords, distance, duration);
     this.cadence = cadence;
     this._calcPace();
+    this.type = "Running";
   }
 
   _calcPace() {
@@ -55,6 +56,7 @@ class Cycling extends Workout {
     super(coords, distance, duration);
     this.elevation = elevation;
     this._calcSpeed();
+    this.type = "Cycling";
   }
 
   _calcSpeed() {
@@ -66,19 +68,13 @@ class Cycling extends Workout {
 class App {
   #map;
   #mapE;
+  #workouts = [];
 
   constructor() {
     this._getPosition();
     form.addEventListener("submit", this._addNewWorkout.bind(this));
     closeForm[0].addEventListener("click", this._hideWorkoutForm.bind(this));
     workoutType.addEventListener("change", this._toggleElevationField);
-
-    // time.addEventListener("keyup", this._validateTime);
-  }
-
-  _validateTime() {
-    let isValid = validation.isAlpha(time.value);
-    console.log(isValid);
   }
 
   _getPosition() {
@@ -102,7 +98,6 @@ class App {
   }
 
   _toggleElevationField() {
-    console.log("changed");
     document
       .querySelectorAll(".toggle-type")
       .forEach(el => el.classList.toggle("hidden"));
@@ -121,20 +116,36 @@ class App {
 
   _addNewWorkout(e) {
     e.preventDefault();
-
+    const { lat, lng } = this.#mapE.latlng;
+    let isPositive = (...numbers) => numbers.every(number => number > 0);
     let formData = new FormData(form);
+    let time = formData.get("time");
+    let distance = formData.get("distance");
 
-    // for (let [key, value] of formData) {
-    //   if (value == "") return alert(`Please fill ${key}`);
-    // }
+    let workout;
+    if (workoutType.value == "running") {
+      let cadence = formData.get("cadence");
+      if (!isPositive(time, distance, cadence))
+        return alert("Values should not be negative or empty1");
+      workout = new Running([lat, lng], distance, time, cadence);
+    }
 
-    this._renderWorkoutMarker();
+    if (workoutType.value === "cycling") {
+      let elevation = formData.get("elevation");
+      if (!isPositive(time, distance))
+        return alert("Values should not be negative or empty2");
+      workout = new Cycling([lat, lng], distance, time, elevation);
+    }
+
+    this.#workouts.push(workout);
+    console.log(workout, "-workout");
+
     this._hideWorkoutForm();
+    this._renderWorkoutMarker(workout);
   }
 
-  _renderWorkoutMarker() {
-    const { lat, lng } = this.#mapE.latlng;
-    L.marker([lat, lng])
+  _renderWorkoutMarker(workout) {
+    L.marker(workout.coords)
       .addTo(this.#map)
       .bindPopup(
         L.popup({
@@ -142,7 +153,7 @@ class App {
           minWidth: 100,
           autoClose: false,
           closeOnClick: false,
-          className: `leaflet-popup`,
+          className: `${workout.type}-popup`,
         })
       )
       .setPopupContent(`HI popup`)
