@@ -72,6 +72,7 @@ html {
   flex-direction: column;
   gap: 0.8rem;
   color: #fff;
+  margin-bottom: 1.6rem;
 
   opacity: 1;
 
@@ -120,7 +121,6 @@ html {
   }
 }
 
-
 .button-container > button {
 }
 
@@ -133,3 +133,42 @@ html {
 .hidden {
   display: none;
 }
+
+.workout-items {
+  list-style: none;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+}
+
+.workout-item {
+  background-color: #42484d;
+  width: 100%;
+  /* height: 4rem; */
+  padding: 1.3em 1.7em;
+  border-radius: 0.4rem;
+}
+
+.workout-item > .workout-title {
+  font-size: 1.3rem;
+  padding: 0 0 0.5em 0em;
+}
+
+.workout-details {
+  display: flex;
+  justify-content: space-between;
+}
+.workout-details > span {
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+.workout-item.workout--running {
+  border-left: 5px solid yellow;
+}
+.workout-item.workout--cycling {
+  border-left: 5px solid rgb(213, 213, 70);
+}
+
+.activity-list.hidden;
