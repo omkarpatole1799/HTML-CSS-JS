@@ -35,6 +35,15 @@ class Workout {
     this.distance = distance;
     this.duration = duration;
   }
+
+  _workoutDescription() {
+    // prettier-ignore
+    let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct','Nov', 'Dec']
+    let workOutName = this.type[0].toUpperCase() + this.type.slice(1);
+    let workoutMonth = months[this.date.getMonth()];
+    let workoutDate = this.date.getDate();
+    this.description = `${workOutName} on ${workoutMonth} ${workoutDate}`;
+  }
 }
 
 class Running extends Workout {
@@ -142,6 +151,7 @@ class App {
 
     this._hideWorkoutForm();
     this._renderWorkoutMarker(workout);
+    this._renderWorkout(workout);
   }
 
   _renderWorkoutMarker(workout) {
@@ -158,6 +168,19 @@ class App {
       )
       .setPopupContent(`HI popup`)
       .openPopup();
+  }
+
+  _renderWorkout(workout) {
+    let _html = `
+          <li class="workout-item workout--${workout.type}">
+            <p class="workout-title">Running on Apr 30</p>
+            <div class="workout-details">
+              <span>🏃‍♀️ ${workout.distance} KM</span>
+              <span>🕒 ${workout.duration} MIN</span>
+              <span>⚡ 1.0 MIN/KM</span>
+              <span>🚶 2 SPM</span>
+            </div>
+          </li>`;
   }
 }
 
