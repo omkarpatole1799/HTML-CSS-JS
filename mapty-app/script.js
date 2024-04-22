@@ -3,6 +3,7 @@ const form = document.getElementById("work-out-form");
 const workoutType = document.getElementById("work-out-type");
 const closeForm = document.getElementsByClassName("close-work-out-form-btn");
 const time = document.getElementById("time");
+const workoutItems = document.querySelector(".workout-items");
 
 const _numeric = document.querySelectorAll("._numeric");
 
@@ -34,15 +35,19 @@ class Workout {
     this.coords = coords;
     this.distance = distance;
     this.duration = duration;
+
+    // prettier-ignore
+    this.months = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
+                    "Aug", "Sept", "Oct", "Nov", "Dec", ];
+
+    this.day = this.date.getDate();
+    this.month = this.months[this.date.getMonth()];
   }
 
   _workoutDescription() {
     // prettier-ignore
-    let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct','Nov', 'Dec']
     let workOutName = this.type[0].toUpperCase() + this.type.slice(1);
-    let workoutMonth = months[this.date.getMonth()];
-    let workoutDate = this.date.getDate();
-    this.description = `${workOutName} on ${workoutMonth} ${workoutDate}`;
+    this.description = `${workOutName} on ${this.month} ${this.day}`;
   }
 }
 
@@ -56,7 +61,7 @@ class Running extends Workout {
 
   _calcPace() {
     this.pace = this.duration / this.distance;
-    return this.pace;
+    return this.pace.toFixed(1);
   }
 }
 
@@ -70,7 +75,7 @@ class Cycling extends Workout {
 
   _calcSpeed() {
     this.speed = this.distance / (this.duration / 60);
-    return this.speed;
+    return this.speed.toFixed(1);
   }
 }
 
@@ -119,8 +124,10 @@ class App {
   }
 
   _hideWorkoutForm() {
+    form.style.display = "none";
     form.classList.add("hidden");
     form.reset();
+    setTimeout(() => (form.style.display = "flex"), 500);
   }
 
   _addNewWorkout(e) {
@@ -147,11 +154,23 @@ class App {
     }
 
     this.#workouts.push(workout);
+    this._saveToLoalStorage();
     console.log(workout, "-workout");
 
     this._hideWorkoutForm();
     this._renderWorkoutMarker(workout);
-    this._renderWorkout(workout);
+    this._renderWorkout();
+  }
+
+  _saveToLoalStorage() {
+    let workouts = this.#workouts;
+    let oldWorkouts = JSON.parse(localStorage.getItem("workouts"));
+    if (oldWorkouts == null) oldWorkouts = workouts;
+    else {
+      oldWorkouts = [...workouts, ...oldWorkouts];
+    }
+
+    localStorage.setItem("workouts", JSON.stringify(oldWorkouts));
   }
 
   _renderWorkoutMarker(workout) {
@@ -170,17 +189,31 @@ class App {
       .openPopup();
   }
 
-  _renderWorkout(workout) {
-    let _html = `
-          <li class="workout-item workout--${workout.type}">
-            <p class="workout-title">Running on Apr 30</p>
+  _renderWorkout() {
+    // prettier-ignore
+    let _html = this.#workouts.map(workout => {
+        return `
+          <li class="workout-item workout--${workout.type.toLowerCase()}">
+            <p class="workout-title">Running on ${workout.month} ${workout.day}</p>
             <div class="workout-details">
               <span>🏃‍♀️ ${workout.distance} KM</span>
               <span>🕒 ${workout.duration} MIN</span>
-              <span>⚡ 1.0 MIN/KM</span>
-              <span>🚶 2 SPM</span>
+              <span>🚶 ${
+                workout.type.toLowerCase() === "running"
+                  ? workout.pace + "KM/H"
+                  : workout.speed + "MIN/KM"
+              }</span>
+              <span>🚶 ${
+                workout.type.toLowerCase() === "running"
+                  ? workout.cadence + "SPM"
+                  : workout.elevation + "M"
+              }</span>
             </div>
           </li>`;
+      })
+      .join(" ");
+
+    workoutItems.innerHTML = _html;
   }
 }
 

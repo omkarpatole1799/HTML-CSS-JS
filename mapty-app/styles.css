@@ -76,7 +76,8 @@ html {
 
   opacity: 1;
 
-  transform: translateY(0rem);
+  /* transform: translateY(0rem); */
+  height: 20rem; 
 
   transition: 500ms ease-in-out;
 
@@ -170,5 +171,3 @@ html {
 .workout-item.workout--cycling {
   border-left: 5px solid rgb(213, 213, 70);
 }
-
-.activity-list.hidden;

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    console.log("Hi");
+    async function getData() {
+      try {
+        let response = await fetch("http://192.168.1.4:2001/");
+        const headers = response.headers;
+        let totalFileSize = headers.get("Content-Length");
+        let downloadStartProgress = 0;
+        let downloadPercentage = 0;
+        let fileType;
+        if (headers.get("Content-Type") === "application/pdf")
+          fileType = ".pdf";
+
+        let reader = response.body.getReader();
+        const chunks = [];
+        while (true) {
+          const r = await reader.read();
+          if (r.done) {
+            console.log("Done");
+            break;
+          }
+          chunks.push(r.value);
+          downloadStartProgress += r.value.byteLength;
+          downloadPercentage = (
+            (downloadStartProgress / totalFileSize) *
+            100
+          ).toFixed(1);
+          console.log(downloadPercentage);
+        }
+        console.log(chunks);
+        const file = new File(chunks, "omkar.zip");
+        console.log(file)
+        // const blob = new Blob(chunks);
+
+        console.log(blob);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getData();
+  </script>
+</html>
