@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include('../includes/masterIncludes.ejs')%>
+    <title>Document</title>
+
+    <script src="/assets/js/staff-dashboard-handler.js" defer></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#"
+                >Subjects</a
+              >
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#"
+                >Attendance</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="attendance-list mt-5">
+        <h5>Attendance Section</h5>
+        <button class="btn btn-primary btn-sm">Add Student</button>
+        <button class="btn btn-primary btn-sm">Students List</button>
+      </div>
+    </div>
+
+    <!-- add student form -->
+    <div class="container">
+      <form class="row" action="" id="add-student-form">
+        <div class="col-md-6">
+          <div class="my-3">
+            <label for="" class="form-label">Student Name</label>
+            <input type="text" class="form-control" id="" name="student-name" />
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="my-3">
+            <label for="" class="form-label">Mobile Number</label>
+            <input type="text" class="form-control" id="" name="mobile" />
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="my-3">
+            <label for="" class="form-label">Department</label>
+            <select name="department" class="form-control" id="">
+              <option value="civil">Civil</option>
+              <option value="electrical">Electrical</option>
+              <option value="mechanical">Mechanical</option>
+              <option value="computer">Computer</option>
+              <option value="it">I.T.</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="my-3">
+            <label for="" class="form-label">Year</label>
+            <select name="year" id="" class="form-control">
+              <option value="FE">FE</option>
+              <option value="SE">SE</option>
+              <option value="TE">TE</option>
+              <option value="BE">BE</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <button type="submit" class="btn btn-outline-primary btn-sm">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
