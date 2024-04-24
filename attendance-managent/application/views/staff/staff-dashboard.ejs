@@ -58,21 +58,31 @@
         <div class="col-md-6">
           <div class="my-3">
             <label for="" class="form-label">Student Name</label>
-            <input type="text" class="form-control" id="" name="student-name" />
+            <input
+              type="text"
+              class="form-control student-name"
+              id=""
+              name="student-name"
+            />
           </div>
         </div>
 
         <div class="col-md-6">
           <div class="my-3">
             <label for="" class="form-label">Mobile Number</label>
-            <input type="text" class="form-control" id="" name="mobile" />
+            <input
+              type="text"
+              class="form-control mobile-no"
+              id=""
+              name="mobile"
+            />
           </div>
         </div>
 
         <div class="col-md-6">
           <div class="my-3">
             <label for="" class="form-label">Department</label>
-            <select name="department" class="form-control" id="">
+            <select name="department" class="form-control department" id="">
               <option value="civil">Civil</option>
               <option value="electrical">Electrical</option>
               <option value="mechanical">Mechanical</option>
@@ -85,7 +95,7 @@
         <div class="col-md-6">
           <div class="my-3">
             <label for="" class="form-label">Year</label>
-            <select name="year" id="" class="form-control">
+            <select name="year" id="" class="form-control year">
               <option value="FE">FE</option>
               <option value="SE">SE</option>
               <option value="TE">TE</option>
@@ -98,8 +108,35 @@
           <button type="submit" class="btn btn-outline-primary btn-sm">
             Submit
           </button>
+          <button
+            name=""
+            type="reset"
+            class="btn btn-link btn-sm text-danger"
+          >
+            Reset
+          </button>
         </div>
       </form>
+    </div>
+
+
+    <div class="container">
+      <table class="table table-borderless">
+        <thead>
+          <tr class="text-center">
+            <th>Sr No</th>
+            <th>Student ID</th>
+            <th>Student Name</th>
+            <th>Student Mobile</th>
+            <th>Student Department</th>
+            <th>Student Year</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody class="student-list-tbody">
+
+        </tbody>
+      </table>
     </div>
   </body>
 </html>

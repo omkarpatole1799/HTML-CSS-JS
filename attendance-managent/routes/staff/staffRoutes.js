@@ -9,4 +9,6 @@ router.get("/dashboard", staffController.getStaffDashboard)
 
 router.post("/save-student", staffController.saveStudentData)
 
+router.get('/students-list', staffController.getStudentsList)
+
 module.exports = router
