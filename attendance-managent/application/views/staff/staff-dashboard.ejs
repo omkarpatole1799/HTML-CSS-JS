@@ -47,15 +47,18 @@
     <div class="container">
       <div class="attendance-list mt-5">
         <h5>Attendance Section</h5>
-        <button class="btn btn-primary btn-sm">Add Student</button>
-        <button class="btn btn-primary btn-sm">Students List</button>
+        <button class="btn btn-primary btn-sm add-std-btn">Add Student</button>
+        <button class="btn btn-primary btn-sm std-list-btn">
+          Students List
+        </button>
+        <button class="btn btn-primary btn-sm add-sub-btn">Add Subject</button>
       </div>
     </div>
 
     <!-- add student form -->
-    <div class="container">
+    <div class="container add-std-form">
       <form class="row" action="" id="add-student-form">
-        <div class="col-md-6">
+        <div class="col-md-3">
           <div class="my-3">
             <label for="" class="form-label">Student Name</label>
             <input
@@ -67,7 +70,7 @@
           </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-3">
           <div class="my-3">
             <label for="" class="form-label">Mobile Number</label>
             <input
@@ -79,7 +82,7 @@
           </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-3">
           <div class="my-3">
             <label for="" class="form-label">Department</label>
             <select name="department" class="form-control department" id="">
@@ -92,7 +95,7 @@
           </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-3">
           <div class="my-3">
             <label for="" class="form-label">Year</label>
             <select name="year" id="" class="form-control year">
@@ -108,19 +111,14 @@
           <button type="submit" class="btn btn-outline-primary btn-sm">
             Submit
           </button>
-          <button
-            name=""
-            type="reset"
-            class="btn btn-link btn-sm text-danger"
-          >
+          <button name="" type="reset" class="btn btn-link btn-sm text-danger">
             Reset
           </button>
         </div>
       </form>
     </div>
 
-
-    <div class="container">
+    <div class="container students-list">
       <table class="table table-borderless">
         <thead>
           <tr class="text-center">
@@ -133,7 +131,76 @@
             <th>Action</th>
           </tr>
         </thead>
-        <tbody class="student-list-tbody">
+        <tbody class="student-list-tbody"></tbody>
+      </table>
+    </div>
+
+    <div class="container add-sub-form-container">
+      <form class="row" action="" id="add-sub-form">
+        <div class="col-md-4">
+          <div class="my-3">
+            <label for="" class="form-label">Subject Name</label>
+            <input
+              type="text"
+              class="form-control sub-name"
+              id=""
+              name="sub-name"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="my-3">
+            <label for="sub-year" class="form-label">Year</label>
+            <select name="sub-year" id="sub-year" class="form-control sub-year">
+              <option value="FE">FE</option>
+              <option value="SE">SE</option>
+              <option value="TE">TE</option>
+              <option value="BE">BE</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="my-3">
+            <label for="sub-department" class="form-label">Department</label>
+            <select
+              name="sub-department"
+              class="form-control sub-department"
+              id="sub-department"
+            >
+              <option value="civil">Civil</option>
+              <option value="electrical">Electrical</option>
+              <option value="mechanical">Mechanical</option>
+              <option value="computer">Computer</option>
+              <option value="it">I.T.</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <button type="submit" class="btn btn-outline-primary btn-sm">
+            Submit
+          </button>
+          <button name="" type="reset" class="btn btn-link btn-sm text-danger">
+            Reset
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="container sub-list-container">
+      <table class="table table-borderless">
+        <thead>
+          <tr>
+            <th>Sr No</th>
+            <th>Name</th>
+            <th>Department</th>
+            <th>Year</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody class="sub-list-tbody">
 
         </tbody>
       </table>

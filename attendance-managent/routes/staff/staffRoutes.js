@@ -11,4 +11,11 @@ router.post("/save-student", staffController.saveStudentData)
 
 router.get('/students-list', staffController.getStudentsList)
 
+router.delete('/delete-student', staffController.deleteStudent)
+
+
+router.get('/subject-list', staffController.getSubList)
+router.post('/add-subject', staffController.addSubject)
+
+
 module.exports = router
