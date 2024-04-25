@@ -10,7 +10,9 @@ const staffController = {
 
   getStaffDashboard: (req, res, next) => {
     try {
-      res.render("staff/staff-dashboard.ejs")
+      res.render("staff/staff-dashboard.ejs",{
+        
+      })
     } catch (error) {
       console.log(error)
     }
@@ -83,6 +85,52 @@ const staffController = {
           success: true,
           status: 201,
           message: "Added Subject Successfully",
+        })
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  },
+
+  deleteSubject: async (req, res, next) => {
+    try {
+      let _deleteSubRes = await staffModel.deleteSubject(req.body.deleteId)
+      console.log(_deleteSubRes)
+      if (_deleteSubRes[0].affectedRows === 1) {
+        return res.status(201).json({
+          success: true,
+          status: 200,
+          message: "Deleted Subject Successfully",
+        })
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  },
+
+  // staff authentication
+  loginStaff: async (req, res, next) => {
+    try {
+      let _staffLoginDetails = await staffModel.loginStaff(req.body)
+
+      console.log(_staffLoginDetails)
+
+      if (_staffLoginDetails[0].length == 0) {
+        return res.status(401).json({
+          success: false,
+          status: 401,
+          message: "Unauthorized",
+        })
+      }
+      if (_staffLoginDetails[0].length >= 1) {
+        req.session.userName = _staffLoginDetails[0][0].username
+        req.session.password = _staffLoginDetails[0][0].password
+
+        console.log(req.session, "-session ")
+        return res.status(200).json({
+          success: true,
+          status: 200,
+          message: "Authorized",
         })
       }
     } catch (error) {

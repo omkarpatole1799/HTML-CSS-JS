@@ -29,6 +29,20 @@ const staffModel = {
       [data.sub_name, data.sub_department, data.sub_year]
     )
   },
+
+  deleteSubject: subId => {
+    return db.execute(`DELETE FROM subjects WHERE id = ?`, [subId])
+  },
+
+  // staff authentication
+
+  loginStaff: ({ userName, password }) => {
+    console.log(userName, password)
+    return db.execute(
+      `SELECT * FROM staff_login WHERE username = ? AND password = ? LIMIT 1`,
+      [userName, password]
+    )
+  },
 }
 
 module.exports = staffModel

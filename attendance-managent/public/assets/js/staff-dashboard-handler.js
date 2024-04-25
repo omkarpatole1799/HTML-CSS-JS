@@ -172,21 +172,47 @@ window.addEventListener("DOMContentLoaded", () => {
 
       if (_data.data.length == 0) return
 
+      console.log(_data.data)
       let subListTbody = document.querySelector(".sub-list-tbody")
-      let _html = _data.data.map(el => {
-        return `
+      let _html = _data.data
+        .map(el => {
+          return `
           <tr>
             <th>Sr No</th>
             <th>${el.sub_name}</th>
             <th>${el.sub_department}</th>
             <th>${el.sub_year}</th>
             <th>
-              <button class='btn btn-danger btn-sm'>x</button>
+              <button class='btn btn-danger btn-sm delete-sub-btn' data-id="${el.id}">x</button>
             </th>
           </tr>
         `
-      }).join(' ')
+        })
+        .join(" ")
       subListTbody.innerHTML = _html
+
+      this._deleteSubjectBtnActivate()
+    }
+    _deleteSubjectBtnActivate() {
+      document.querySelectorAll(".delete-sub-btn").forEach(el => {
+        el.addEventListener("click", async function () {
+          let deleteId = this.getAttribute("data-id")
+
+          let _response = await fetch("/staff/delete-subject", {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ deleteId }),
+          })
+
+          let _data = await _response.json()
+          console.log(_data)
+          if (_data.success) {
+            window.location.reload()
+          }
+        })
+      })
     }
   }
 

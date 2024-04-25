@@ -1,4 +1,5 @@
 const express = require("express")
+const session = require("express-session")
 const app = express()
 const path = require("path")
 const dotenv = require("dotenv")
@@ -13,6 +14,13 @@ app.set("views", path.join(__dirname, "/application/views"))
 // json parser
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+app.use(
+  session({
+    secret: "attendance-management",
+    resave: false,
+    saveUninitialized: true,
+  })
+)
 
 // static files
 app.use(express.static("public"))

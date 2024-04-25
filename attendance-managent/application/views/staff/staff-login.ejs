@@ -12,27 +12,34 @@
     <div class="container d-flex justify-content-center align-items-center">
       <form id="staff-login-form">
         <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label"
-            >Email address</label
-          >
+          <label for="username" class="form-label">Username</label>
           <input
-            type="email"
+            type="text"
             class="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-            name="email"
+            id="username"
+            name="username"
           />
         </div>
         <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <label for="password" class="form-label">Password</label>
           <input
             type="password"
             class="form-control"
-            id="exampleInputPassword1"
+            id="password"
             name="password"
           />
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="d-flex justify-content-center">
+          <button type="reset" class="btn btn-link text-danger">Reset</button>
+          <button type="submit" class="mb-2 btn btn-outline-primary btn-sm">
+            Submit
+          </button>
+        </div>
+        <p
+          class="text-danger text-decoration-underline hidden invalid-login-message"
+        >
+          Invalid Login Credentials
+        </p>
       </form>
     </div>
   </body>

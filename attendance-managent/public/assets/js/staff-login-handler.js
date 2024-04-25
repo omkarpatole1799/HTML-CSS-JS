@@ -1,15 +1,40 @@
-$(document).ready(() => {
+window.addEventListener("DOMContentLoaded", () => {
   console.log("staff login handler loaded")
-  let loginForm = $("#staff-login-form")
 
-  loginForm.on("submit", function (e) {
+  let loginForm = document.querySelector("#staff-login-form")
+
+  loginForm.addEventListener("submit", function (e) {
     e.preventDefault()
-    let formData = new FormData($(this)[0])
 
-    let emailId = formData.get("email")
-    let password = formData.get("password")
+    let userName = document.querySelector("#username").value
+    let password = document.querySelector("#password").value
 
-    if (emailId == "" || password == "")
-      return alert("Email or password invalid")
+    if (!userName || !password) return showInvalidLoginDetails()
+
+    getStaffLogin(userName, password)
   })
+
+  async function getStaffLogin(userName, password) {
+    let _response = await fetch("/staff/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userName, password }),
+    })
+
+    let _data = await _response.json()
+
+    if (!_data.success) return showInvalidLoginDetails()
+    console.log(_data, '---')
+
+    if (_data.success) {
+      window.location.assign("/staff/dashboard")
+    }
+  }
+
+  function showInvalidLoginDetails() {
+    showEl([".invalid-login-message"])
+    setTimeout(() => hideEl([".invalid-login-message"]), 1400)
+  }
 })
