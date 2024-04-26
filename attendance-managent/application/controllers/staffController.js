@@ -10,8 +10,8 @@ const staffController = {
 
   getStaffDashboard: (req, res, next) => {
     try {
-      res.render("staff/staff-dashboard.ejs",{
-        
+      res.render("staff/staff-dashboard.ejs", {
+        loggedInYear: JSON.stringify(req.session.userName),
       })
     } catch (error) {
       console.log(error)
@@ -35,7 +35,8 @@ const staffController = {
 
   getStudentsList: async (req, res, next) => {
     try {
-      let _studentsListResponse = await staffModel.getStudentsList()
+      let year = req.query.year
+      let _studentsListResponse = await staffModel.getStudentsList(year)
       return res.status(200).json({
         success: true,
         status: 200,
@@ -64,7 +65,10 @@ const staffController = {
 
   getSubList: async (req, res, next) => {
     try {
-      let _subListRes = await staffModel.getSubList()
+      let department = req.query.department
+      let year = req.query.year
+      console.log(department, year)
+      let _subListRes = await staffModel.getSubList(department, year)
       return res.status(200).json({
         success: true,
         status: 200,

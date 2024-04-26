@@ -6,6 +6,11 @@
     <%- include('../includes/masterIncludes.ejs')%>
     <title>Document</title>
 
+    <script>
+      let loggedInYear = <%- loggedInYear%>
+      console.log(loggedInYear)
+    </script>
+
     <script src="/assets/js/staff-dashboard-handler.js" defer></script>
   </head>
   <body>
@@ -98,12 +103,7 @@
         <div class="col-md-3">
           <div class="my-3">
             <label for="" class="form-label">Year</label>
-            <select name="year" id="" class="form-control year">
-              <option value="FE">FE</option>
-              <option value="SE">SE</option>
-              <option value="TE">TE</option>
-              <option value="BE">BE</option>
-            </select>
+            <input name="year" id="" class="form-control year" readonly />
           </div>
         </div>
 
@@ -152,12 +152,12 @@
         <div class="col-md-4">
           <div class="my-3">
             <label for="sub-year" class="form-label">Year</label>
-            <select name="sub-year" id="sub-year" class="form-control sub-year">
-              <option value="FE">FE</option>
-              <option value="SE">SE</option>
-              <option value="TE">TE</option>
-              <option value="BE">BE</option>
-            </select>
+            <input
+              type="text"
+              id="sub-year"
+              class="form-control sub-year"
+              readonly
+            />
           </div>
         </div>
 
@@ -200,10 +200,40 @@
             <th>Delete</th>
           </tr>
         </thead>
-        <tbody class="sub-list-tbody">
-
-        </tbody>
+        <tbody class="sub-list-tbody"></tbody>
       </table>
+    </div>
+
+    <!-- add attendance -->
+    <div class="container">
+      <h3>Add Attendance</h3>
+
+      <div class="row">
+        <div class="col-md-4">
+          <label for="att-date">Date</label>
+          <input type="date" id="att-date" class="form-control" />
+        </div>
+
+        <div class="col-md-4">
+          <label for="att-dept">Department</label>
+          <select
+            name="att-dept"
+            class="form-control att-dept"
+            id="att-dept"
+          >
+            <option value="civil">Civil</option>
+            <option value="electrical">Electrical</option>
+            <option value="mechanical">Mechanical</option>
+            <option value="computer">Computer</option>
+            <option value="it">I.T.</option>
+          </select>
+        </div>
+
+        <div class="col-md-4">
+          <label for="att-sub">Subject</label>
+          <select name="att-sub" class="form-control" id="att-sub"></select>
+        </div>
+      </div>
     </div>
   </body>
 </html>

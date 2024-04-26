@@ -3,6 +3,11 @@ window.addEventListener("DOMContentLoaded", () => {
   console.log("staff-dashboard-handler.js loaded")
   getStudentsList()
 
+  let subYear = document.querySelector(".sub-year")
+  let year = document.querySelector(".year")
+
+  year.value = subYear.value = loggedInYear
+
   let studentsListAll
   let deleteStudBtn
   let addStudentForm = document.getElementById("add-student-form")
@@ -66,7 +71,7 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   async function getStudentsList() {
-    let _response = await fetch("/staff/students-list")
+    let _response = await fetch(`/staff/students-list?year=${loggedInYear}`)
     let _data = await _response.json()
     if (_data.success) {
       studentsListAll = _data.data
@@ -217,4 +222,24 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   const addSubject = new AddSubject()
+
+  // add attendance
+
+  let attDept = document.querySelector("#att-dept")
+  attDept.addEventListener("change", function () {
+    getSubjects(this.value)
+  })
+
+  async function getSubjects(department) {
+    let _response = await fetch(
+      `/staff/subject-list?department=${department}&year=${loggedInYear}`
+    )
+    let _data = await _response.json()
+    console.log(_data)
+    if (_data.success) {
+      let attSub = document.querySelector("#att-sub")
+      let _html = _data.data.map(el => `<option>${el.sub_name}</option>`)
+      attSub.innerHTML = _html
+    }
+  }
 })

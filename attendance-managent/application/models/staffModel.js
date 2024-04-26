@@ -10,16 +10,21 @@ const staffModel = {
     )
   },
 
-  getStudentsList: () => {
-    return db.execute(`SELECT * FROM students`)
+  getStudentsList: year => {
+    return db.execute(`SELECT * FROM students WHERE s_year = ?`, [year])
   },
 
   deleteStudent: sId => {
     return db.execute(`DELETE FROM students where id = ?`, [+sId])
   },
 
-  getSubList: () => {
-    return db.execute("SELECT * FROM subjects")
+  getSubList: (department, year) => {
+    if (department)
+      return db.execute(
+        "SELECT * FROM subjects WHERE sub_department=? AND sub_year=?",
+        [department, year]
+      )
+    else return db.execute("SELECT * FROM subjects")
   },
 
   addSubject: ({ formData: data }) => {
