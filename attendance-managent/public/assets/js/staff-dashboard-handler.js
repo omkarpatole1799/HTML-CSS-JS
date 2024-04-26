@@ -117,13 +117,15 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  async function getStudentsList(department = "") {
+  async function getStudentsList(department = "", type = "list-only") {
     let _response = await fetch(
       `/staff/students-list?department=${department}&year=${loggedInYear}`
     )
     let _data = await _response.json()
+    let _stdListEl = document.querySelector(".students-list")
     if (_data.success) {
       studentsListAll = _data.data
+      if (type != "list-only") _stdListEl.classList.remove("hidden")
       printStudentsTable(studentsListAll)
     }
   }
@@ -313,6 +315,6 @@ window.addEventListener("DOMContentLoaded", () => {
     let year = loggedInYear
     console.log(department, year)
 
-    getStudentsList(department)
+    getStudentsList(department, 'add-attendance')
   })
 })
