@@ -134,9 +134,12 @@ window.addEventListener("DOMContentLoaded", () => {
     console.log(list, "students list")
     let studentListTbody = document.querySelector(".student-list-tbody")
     // prettier-ignore
-    let _html = list
-      .map((el, i) => {
-        return `
+    let _html
+    if (list.length == 0) _html = `<tr colspan='4'>Nothing But Crickets!!!</tr>`
+    else
+      _html = list
+        .map((el, i) => {
+          return `
           <tr class='text-center'>
             <td>${i + 1}</td>
             <td>${el.id}</td>
@@ -145,12 +148,14 @@ window.addEventListener("DOMContentLoaded", () => {
             <td>${el.s_department.toUpperCase()}</td>
             <td>${el.s_year}</td>
             <td>
-              <button class='btn btn-outline-danger btn-sm delete-student-btn' data-id='${el.id}'>x</button>
+              <button class='btn btn-outline-danger btn-sm delete-student-btn' data-id='${
+                el.id
+              }'>x</button>
             </td>
           </tr>
       `
-      })
-      .join(" ")
+        })
+        .join(" ")
     studentListTbody.innerHTML = _html
     refresh()
   }
@@ -230,21 +235,25 @@ window.addEventListener("DOMContentLoaded", () => {
 
       console.log(_data.data)
       let subListTbody = document.querySelector(".sub-list-tbody")
-      let _html = _data.data
-        .map(el => {
-          return `
+      let _html
+      if (_data.data.length == 0) _html = `<tr>Nothing But Crickets!!!</tr>`
+      // prettier-ignore
+      else
+        _html = _data.data
+          .map((el,i) => {
+            return `
           <tr>
-            <td>Sr No</td>
+            <td>${i + 1}</td>
             <td>${el.sub_name}</td>
-            <td>${el.sub_department}</td>
+            <td>${el.sub_department.toUpperCase()}</td>
             <td>${el.sub_year}</td>
             <td>
               <button class='btn btn-danger btn-sm delete-sub-btn' data-id="${el.id}">x</button>
             </td>
           </tr>
         `
-        })
-        .join(" ")
+          })
+          .join(" ")
       subListTbody.innerHTML = _html
 
       this._deleteSubjectBtnActivate()
@@ -308,7 +317,6 @@ window.addEventListener("DOMContentLoaded", () => {
     console.log(attDate.value)
     if (!attDate.value) return alert("Please Select Attendance Date!")
     if (!attDept.value) return alert("Please Select Department!")
-    if (!attSub.value) return alert("Please Select Subject!")
 
     let department = attDept.value
     let year = loggedInYear
