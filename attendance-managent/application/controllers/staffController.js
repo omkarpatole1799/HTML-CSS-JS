@@ -38,7 +38,11 @@ const staffController = {
   getStudentsList: async (req, res, next) => {
     try {
       let year = req.query.year
-      let _studentsListResponse = await staffModel.getStudentsList(year)
+      let department = req.query.department
+      console.log(year, department, '-this')
+
+      let _studentsListResponse = await staffModel.getStudentsList(department,year)
+      console.log(_studentsListResponse[0], 'this----')
       return res.status(200).json({
         success: true,
         status: 200,

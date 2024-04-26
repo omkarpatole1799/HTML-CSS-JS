@@ -10,8 +10,17 @@ const staffModel = {
     )
   },
 
-  getStudentsList: year => {
-    return db.execute(`SELECT * FROM students WHERE s_year = ?`, [year])
+  getStudentsList: (department, year) => {
+    if (!department) {
+      return db.execute(`SELECT * FROM students WHERE s_year = ?`, [year])
+    }
+
+    if (department) {
+      return db.execute(
+        `SELECT * FROM students WHERE s_year = ? AND s_department = ?`,
+        [year, department]
+      )
+    }
   },
 
   deleteStudent: sId => {

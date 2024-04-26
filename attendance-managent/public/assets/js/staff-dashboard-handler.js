@@ -1,6 +1,15 @@
 window.addEventListener("DOMContentLoaded", () => {
-  // hideEl([".students-list, .add-std-form", ".add-sub-form"])
   console.log("staff-dashboard-handler.js loaded")
+  hideEl([
+    ".students-list",
+    ".add-sub-form-container",
+    ".sub-list-container",
+    ".add-std-form",
+  ])
+  ;(function setAdminName() {
+    document.querySelector(".admin-name").innerText = "(" + loggedInYear + ")"
+  })()
+
   getStudentsList()
 
   let subYear = document.querySelector(".sub-year")
@@ -12,26 +21,64 @@ window.addEventListener("DOMContentLoaded", () => {
   let deleteStudBtn
   let addStudentForm = document.getElementById("add-student-form")
 
-  let addStdBtn = document.querySelector(".add-std-btn")
   let stdListBtn = document.querySelector(".std-list-btn")
+  let addStdBtn = document.querySelector(".add-std-btn")
   let addSubBtn = document.querySelector(".add-sub-btn")
+  let subListBtn = document.querySelector(".sub-list-btn")
+  let addAttBtn = document.querySelector(".add-att-btn")
 
   stdListBtn.addEventListener("click", e => {
     e.preventDefault()
     showEl([".students-list"])
-    hideEl([".add-std-form", ".add-sub-form-container"])
+    hideEl([
+      ".add-std-form",
+      ".add-sub-form-container",
+      ".add-att-container",
+      ".sub-list-container",
+    ])
   })
 
   addStdBtn.addEventListener("click", e => {
     e.preventDefault()
     showEl([".add-std-form"])
-    hideEl([".students-list", ".add-sub-form-container"])
+    hideEl([
+      ".students-list",
+      ".add-sub-form-container",
+      ".add-att-container",
+      ".sub-list-container",
+    ])
   })
 
+  subListBtn.addEventListener("click", e => {
+    e.preventDefault()
+    showEl([".sub-list-container"])
+    hideEl([
+      ".add-std-form",
+      ".students-list",
+      ".add-att-container",
+      ".add-sub-form-container",
+    ])
+  })
   addSubBtn.addEventListener("click", e => {
     e.preventDefault()
     showEl([".add-sub-form-container"])
-    hideEl([".add-std-form", ".students-list"])
+    hideEl([
+      ".add-std-form",
+      ".students-list",
+      ".add-att-container",
+      ".sub-list-container",
+    ])
+  })
+
+  addAttBtn.addEventListener("click", e => {
+    e.preventDefault()
+    showEl([".add-att-container"])
+    hideEl([
+      ".add-sub-form-container",
+      ".add-std-form",
+      ".students-list",
+      ".sub-list-container",
+    ])
   })
 
   addStudentForm.addEventListener("submit", function (e) {
@@ -70,8 +117,10 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  async function getStudentsList() {
-    let _response = await fetch(`/staff/students-list?year=${loggedInYear}`)
+  async function getStudentsList(department = "") {
+    let _response = await fetch(
+      `/staff/students-list?department=${department}&year=${loggedInYear}`
+    )
     let _data = await _response.json()
     if (_data.success) {
       studentsListAll = _data.data
@@ -80,6 +129,7 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   function printStudentsTable(list) {
+    console.log(list, "students list")
     let studentListTbody = document.querySelector(".student-list-tbody")
     let _html = list
       .map((el, i) => {
@@ -183,13 +233,13 @@ window.addEventListener("DOMContentLoaded", () => {
         .map(el => {
           return `
           <tr>
-            <th>Sr No</th>
-            <th>${el.sub_name}</th>
-            <th>${el.sub_department}</th>
-            <th>${el.sub_year}</th>
-            <th>
+            <td>Sr No</td>
+            <td>${el.sub_name}</td>
+            <td>${el.sub_department}</td>
+            <td>${el.sub_year}</td>
+            <td>
               <button class='btn btn-danger btn-sm delete-sub-btn' data-id="${el.id}">x</button>
-            </th>
+            </td>
           </tr>
         `
         })
@@ -226,6 +276,10 @@ window.addEventListener("DOMContentLoaded", () => {
   // add attendance
 
   let attDept = document.querySelector("#att-dept")
+  let searchStdBtn = document.querySelector("#search-std-btn")
+  let attSub = document.querySelector("#att-sub")
+  let attDate = document.querySelector("#att-date")
+
   attDept.addEventListener("change", function () {
     getSubjects(this.value)
   })
@@ -236,10 +290,29 @@ window.addEventListener("DOMContentLoaded", () => {
     )
     let _data = await _response.json()
     console.log(_data)
+    if (_data.data.length == 0) {
+      attSub.innerHTML = `<option value=''>-- Select Subject--</option>`
+      return
+    }
     if (_data.success) {
-      let attSub = document.querySelector("#att-sub")
       let _html = _data.data.map(el => `<option>${el.sub_name}</option>`)
-      attSub.innerHTML = _html
+      attSub.innerHTML =
+        `<option value="">-- Select Subject --</option>` + _html
     }
   }
+
+  searchStdBtn.addEventListener("click", async function (e) {
+    e.preventDefault()
+
+    console.log(attDate.value)
+    if (!attDate.value) return alert("Please Select Attendance Date!")
+    if (!attDept.value) return alert("Please Select Department!")
+    if (!attSub.value) return alert("Please Select Subject!")
+
+    let department = attDept.value
+    let year = loggedInYear
+    console.log(department, year)
+
+    getStudentsList(department)
+  })
 })

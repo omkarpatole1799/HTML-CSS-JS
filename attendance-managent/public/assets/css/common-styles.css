@@ -7,3 +7,16 @@
 .hidden {
   display: none;
 }
+
+.profile-img {
+  height: 40px;
+  width: 40px;
+  border: 2px solid darksalmon;
+  border-radius: 50%;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3) !important;
+}
+
+.admin-navbar-container {
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3) !important;
+  padding: 0.8rem;
+}

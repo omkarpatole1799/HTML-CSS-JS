@@ -14,54 +14,46 @@
     <script src="/assets/js/staff-dashboard-handler.js" defer></script>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#"></a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#"
-                >Subjects</a
-              >
-            </li>
+    <div class="admin-navbar-container">
+      <div class="container">
+        <div class="d-flex justify-content-between">
+          <div class="d-flex gap-3">
+            <button class="btn btn-outline-info btn-sm add-att-btn">
+              Attendance
+            </button>
+            <button class="btn btn-primary btn-sm std-list-btn">
+              Students List
+            </button>
+            <button class="btn btn-primary btn-sm add-std-btn">
+              Add Student
+            </button>
 
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#"
-                >Attendance</a
-              >
-            </li>
-          </ul>
+            <button class="btn btn-success btn-sm sub-list-btn">
+              Subjects List
+            </button>
+            <button class="btn btn-success btn-sm add-sub-btn">
+              Add Subject
+            </button>
+          </div>
+          <div class="d-flex gap-3 align-items-center">
+            <h5>Welcome, Admin <span class="admin-name"></span></h5>
+            <div>
+              <img
+                src="/assets/images/profile.png"
+                class="profile-img"
+                alt=""
+              />
+            </div>
+          </div>
         </div>
-      </div>
-    </nav>
-
-    <div class="container">
-      <div class="attendance-list mt-5">
-        <h5>Attendance Section</h5>
-        <button class="btn btn-primary btn-sm add-std-btn">Add Student</button>
-        <button class="btn btn-primary btn-sm std-list-btn">
-          Students List
-        </button>
-        <button class="btn btn-primary btn-sm add-sub-btn">Add Subject</button>
       </div>
     </div>
 
+    <h3 class="text-center mt-4">Attendance Management System</h3>
+
     <!-- add student form -->
-    <div class="container add-std-form">
+    <div class="container add-std-form mt-5">
+      <h3 class="my-4">Add Student Form</h3>
       <form class="row" action="" id="add-student-form">
         <div class="col-md-3">
           <div class="my-3">
@@ -118,7 +110,9 @@
       </form>
     </div>
 
-    <div class="container students-list">
+    <!-- students list -->
+    <div class="container students-list mt-5">
+      <h3 class="my-4">Students List</h3>
       <table class="table table-borderless">
         <thead>
           <tr class="text-center">
@@ -135,7 +129,9 @@
       </table>
     </div>
 
-    <div class="container add-sub-form-container">
+    <!-- add subject form -->
+    <div class="container add-sub-form-container mt-5">
+      <h3 class="my-4">Add New Subject</h3>
       <form class="row" action="" id="add-sub-form">
         <div class="col-md-4">
           <div class="my-3">
@@ -189,7 +185,9 @@
       </form>
     </div>
 
-    <div class="container sub-list-container">
+    <!-- subject list -->
+    <div class="container sub-list-container mt-5">
+      <h3 class="my-4">Subjects List</h3>
       <table class="table table-borderless">
         <thead>
           <tr>
@@ -205,22 +203,19 @@
     </div>
 
     <!-- add attendance -->
-    <div class="container">
-      <h3>Add Attendance</h3>
+    <div class="container add-att-container mt-5">
+      <h3 class="my-4">Add Attendance</h3>
 
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
           <label for="att-date">Date</label>
           <input type="date" id="att-date" class="form-control" />
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-3">
           <label for="att-dept">Department</label>
-          <select
-            name="att-dept"
-            class="form-control att-dept"
-            id="att-dept"
-          >
+          <select name="att-dept" class="form-control att-dept" id="att-dept">
+            <option value="">-- Select Department --</option>
             <option value="civil">Civil</option>
             <option value="electrical">Electrical</option>
             <option value="mechanical">Mechanical</option>
@@ -229,9 +224,20 @@
           </select>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-3">
           <label for="att-sub">Subject</label>
-          <select name="att-sub" class="form-control" id="att-sub"></select>
+          <select name="att-sub" class="form-control" id="att-sub">
+            <option value="">-- Select Subject --</option>
+          </select>
+        </div>
+
+        <div class="col-md-3">
+          <button
+            class="mt-4 btn btn-outline-success btn-sm"
+            id="search-std-btn"
+          >
+            Search
+          </button>
         </div>
       </div>
     </div>
