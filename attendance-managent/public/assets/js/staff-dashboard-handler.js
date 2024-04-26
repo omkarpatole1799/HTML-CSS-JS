@@ -133,6 +133,7 @@ window.addEventListener("DOMContentLoaded", () => {
   function printStudentsTable(list) {
     console.log(list, "students list")
     let studentListTbody = document.querySelector(".student-list-tbody")
+    // prettier-ignore
     let _html = list
       .map((el, i) => {
         return `
@@ -141,12 +142,10 @@ window.addEventListener("DOMContentLoaded", () => {
             <td>${el.id}</td>
             <td>${el.s_name}</td>
             <td>${el.s_mobile}</td>
-            <td>${el.s_department}</td>
+            <td>${el.s_department.toUpperCase()}</td>
             <td>${el.s_year}</td>
             <td>
-              <button class='btn btn-outline-danger btn-sm delete-student-btn' data-id='${
-                el.id
-              }'>x</button>
+              <button class='btn btn-outline-danger btn-sm delete-student-btn' data-id='${el.id}'>x</button>
             </td>
           </tr>
       `
@@ -315,6 +314,6 @@ window.addEventListener("DOMContentLoaded", () => {
     let year = loggedInYear
     console.log(department, year)
 
-    getStudentsList(department, 'add-attendance')
+    getStudentsList(department, "add-attendance")
   })
 })
