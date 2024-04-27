@@ -57,6 +57,29 @@ const staffModel = {
       [userName, password]
     )
   },
+
+  // save attendance
+
+  saveAttendance: ([attendance, details]) => {
+    // console.log(attendance, details,'-in modal')
+    let { year, date, department, subject } = details["details"]
+    let query = `INSERT INTO 
+                    attendance (year, department, subject, student_id, status, date)
+                  VALUES ?`
+    let insertArry = []
+    attendance["attendance"].forEach(el =>
+      insertArry.push([
+        year,
+        department,
+        subject,
+        el.id,
+        el.att == "present" ? 1 : 0,
+        date,
+      ])
+    )
+
+    return db.query(query, [insertArry])
+  },
 }
 
 module.exports = staffModel

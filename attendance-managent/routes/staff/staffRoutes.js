@@ -22,4 +22,7 @@ router.delete("/delete-subject", isAuth, staffController.deleteSubject)
 // authentication of staff
 router.post("/login", staffController.loginStaff)
 
+// attendance
+router.post('/save-attendance', staffController.saveAttendance)
+
 module.exports = router

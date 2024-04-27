@@ -358,7 +358,7 @@ window.addEventListener("DOMContentLoaded", () => {
     getStudentsList(department, "add-attendance")
   })
 
-  addAttForm.addEventListener("submit", function (e) {
+  addAttForm.addEventListener("submit", async function (e) {
     e.preventDefault()
     if (!attDate.value) return alert("Please Select Attendance Date!")
     if (!attDept.value) return alert("Please Select Department!")
@@ -385,8 +385,20 @@ window.addEventListener("DOMContentLoaded", () => {
         date: attDate.value,
         department: attDept.value,
         subject: attSub.value,
+        year: loggedInYear
       },
     })
     console.log(sendData, "-final send data")
+
+    let _response = await fetch("/staff/save-attendance", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ sendData }),
+    })
+
+    let _data = await _response.json()
+    console.log(_data, '-after saving attendance')
   })
 })

@@ -39,10 +39,13 @@ const staffController = {
     try {
       let year = req.query.year
       let department = req.query.department
-      console.log(year, department, '-this')
+      console.log(year, department, "-this")
 
-      let _studentsListResponse = await staffModel.getStudentsList(department,year)
-      console.log(_studentsListResponse[0], 'this----')
+      let _studentsListResponse = await staffModel.getStudentsList(
+        department,
+        year
+      )
+      console.log(_studentsListResponse[0], "this----")
       return res.status(200).json({
         success: true,
         status: 200,
@@ -136,6 +139,15 @@ const staffController = {
           message: "Authorized",
         })
       }
+    } catch (error) {
+      console.log(error)
+    }
+  },
+
+  saveAttendance: async (req, res, next) => {
+    try {
+      let _response = await staffModel.saveAttendance(req.body.sendData)
+      console.log(_response, "-after saving attendance")
     } catch (error) {
       console.log(error)
     }
