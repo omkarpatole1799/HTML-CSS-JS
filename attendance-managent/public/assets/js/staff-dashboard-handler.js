@@ -125,8 +125,8 @@ window.addEventListener("DOMContentLoaded", () => {
     let _stdListEl = document.querySelector(".students-list")
     if (_data.success) {
       studentsListAll = _data.data
-      if (type != "list-only") _stdListEl.classList.remove("hidden")
-      printStudentsTable(studentsListAll)
+      if (type == "list-only") printStudentsTable(studentsListAll)
+      if (type == "add-attendance") printStdAttTable(studentsListAll)
     }
   }
 
@@ -135,8 +135,9 @@ window.addEventListener("DOMContentLoaded", () => {
     let studentListTbody = document.querySelector(".student-list-tbody")
     // prettier-ignore
     let _html
-    if (list.length == 0) _html = `<tr colspan='4'>Nothing But Crickets!!!</tr>`
+    if (list.length == 0) _html = `<tr class='text-center'><td colspan='7'>Nothing But Crickets!!!</td></tr>`
     else
+      // prettier-ignore
       _html = list
         .map((el, i) => {
           return `
@@ -148,9 +149,38 @@ window.addEventListener("DOMContentLoaded", () => {
             <td>${el.s_department.toUpperCase()}</td>
             <td>${el.s_year}</td>
             <td>
-              <button class='btn btn-outline-danger btn-sm delete-student-btn' data-id='${
-                el.id
-              }'>x</button>
+              <button class='btn btn-outline-danger btn-sm delete-student-btn' data-id='${el.id}'>
+                <i class="fa-regular fa-trash-can"></i>
+              </button>
+            </td>
+          </tr>
+      `
+        })
+        .join(" ")
+    studentListTbody.innerHTML = _html
+    refresh()
+  }
+
+  function printStdAttTable(list) {
+    console.log(list, "students list")
+    let studentListTbody = document.querySelector(".add-att-form-tbody")
+    // prettier-ignore
+    let _html
+    if (list.length == 0) _html = `<tr><td colspan='5'>Nothing But Crickets!!!</td></tr>`
+    else
+      // prettier-ignore
+      _html = list
+        .map((el, i) => {
+          return `
+          <tr class='text-center'>
+            <td>${i + 1}</td>
+            <td>${el.id}</td>
+            <td>${el.s_name}</td>
+            <td>
+              <input type='radio' name='${el.id}' value='present'/>
+            </td>
+            <td>
+              <input type='radio' name='${el.id}' value='absent'/>
             </td>
           </tr>
       `
@@ -233,22 +263,24 @@ window.addEventListener("DOMContentLoaded", () => {
 
       if (_data.data.length == 0) return
 
-      console.log(_data.data)
+      console.log(_data.data, "this")
       let subListTbody = document.querySelector(".sub-list-tbody")
       let _html
-      if (_data.data.length == 0) _html = `<tr>Nothing But Crickets!!!</tr>`
-      // prettier-ignore
+      if (_data.data.length == 0) _html = `<tr class='text-center'><td colspan='7'>Nothing But Crickets!!!</td></tr>`
       else
+        // prettier-ignore
         _html = _data.data
           .map((el,i) => {
             return `
-          <tr>
+          <tr class='text-center'>
             <td>${i + 1}</td>
             <td>${el.sub_name}</td>
             <td>${el.sub_department.toUpperCase()}</td>
             <td>${el.sub_year}</td>
             <td>
-              <button class='btn btn-danger btn-sm delete-sub-btn' data-id="${el.id}">x</button>
+              <button class='btn btn-outline-danger btn-sm delete-sub-btn' data-id="${el.id}">
+                <i class="fa-regular fa-trash-can"></i>
+              </button>
             </td>
           </tr>
         `
@@ -285,6 +317,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   // add attendance
 
+  let addAttForm = document.querySelector("#add-att-form")
   let attDept = document.querySelector("#att-dept")
   let searchStdBtn = document.querySelector("#search-std-btn")
   let attSub = document.querySelector("#att-sub")
@@ -323,5 +356,37 @@ window.addEventListener("DOMContentLoaded", () => {
     console.log(department, year)
 
     getStudentsList(department, "add-attendance")
+  })
+
+  addAttForm.addEventListener("submit", function (e) {
+    e.preventDefault()
+    if (!attDate.value) return alert("Please Select Attendance Date!")
+    if (!attDept.value) return alert("Please Select Department!")
+    if (!attSub.value) return alert("Please Select Subject")
+
+    let formData = new FormData(this)
+    let sendData = []
+    let stdAtt = []
+
+    for (let [key, value] of formData) {
+      console.log(key, value)
+      stdAtt.push({
+        id: key,
+        att: value,
+      })
+    }
+
+    sendData.push({
+      attendance: stdAtt,
+    })
+
+    sendData.push({
+      details: {
+        date: attDate.value,
+        department: attDept.value,
+        subject: attSub.value,
+      },
+    })
+    console.log(sendData, "-final send data")
   })
 })
