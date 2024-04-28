@@ -59,9 +59,13 @@ const staffModel = {
   },
 
   // save attendance
+  deleteOldRecords: ([attendance, details]) => {
+    let s_id = attendance["attendance"].map(el => el.id).toString()
+    let query = `DELETE FROM attendance WHERE student_id IN (${s_id})`
+    return db.query(query)
+  },
 
   saveAttendance: ([attendance, details]) => {
-    // console.log(attendance, details,'-in modal')
     let { year, date, department, subject } = details["details"]
     let query = `INSERT INTO 
                     attendance (year, department, subject, student_id, status, date)
@@ -79,6 +83,54 @@ const staffModel = {
     )
 
     return db.query(query, [insertArry])
+  },
+
+  _isFilled: async data => {
+    let query = `SELECT 
+                    students.s_name,
+                    students.id,
+                    year,
+                    department,
+                    subject,
+                    student_id,
+                    status,
+                    date
+                FROM
+                    students
+                        LEFT JOIN
+                    attendance ON attendance.student_id = students.id
+                WHERE
+                    year = '${data.year}' AND department = '${data.department}'
+                        AND subject = '${data.subject}'
+                        AND date = '${data.date}'`
+    return db.query(query)
+  },
+
+  checkAttFilled: async data => {
+    console.log(data, "--in model")
+    let query = `SELECT 
+                    att.id AS attendance_id,
+                    std.id,
+                    std.s_name,
+                    year,
+                    department,
+                    subject,
+                    student_id,
+                    status,
+                    date
+                FROM
+                    (SELECT * FROM  students WHERE s_department = ? AND s_year = ?) AS std
+                      LEFT JOIN
+                    (SELECT * FROM attendance WHERE date = ? AND subject = ?)  AS att
+                    ON std.id = att.student_id
+                    AND att.year = std.s_year
+                    AND att.department = std.s_department`
+    return db.execute(query, [
+      data.department,
+      data.year,
+      data.date,
+      data.subject,
+    ])
   },
 }
 

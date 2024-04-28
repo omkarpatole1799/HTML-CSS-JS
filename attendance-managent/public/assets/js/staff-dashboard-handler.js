@@ -1,5 +1,6 @@
 window.addEventListener("DOMContentLoaded", () => {
   console.log("staff-dashboard-handler.js loaded")
+  let isEditAttendance = false
   hideEl([
     ".students-list",
     ".add-sub-form-container",
@@ -81,6 +82,7 @@ window.addEventListener("DOMContentLoaded", () => {
     ])
   })
 
+  // student form
   addStudentForm.addEventListener("submit", function (e) {
     e.preventDefault()
 
@@ -161,10 +163,8 @@ window.addEventListener("DOMContentLoaded", () => {
     refresh()
   }
 
-  function printStdAttTable(list) {
-    console.log(list, "students list")
+  function printStdAttTable(list, type = "not-filled") {
     let studentListTbody = document.querySelector(".add-att-form-tbody")
-    // prettier-ignore
     let _html
     if (list.length == 0) _html = `<tr><td colspan='5'>Nothing But Crickets!!!</td></tr>`
     else
@@ -177,16 +177,18 @@ window.addEventListener("DOMContentLoaded", () => {
             <td>${el.id}</td>
             <td>${el.s_name}</td>
             <td>
-              <input type='radio' name='${el.id}' value='present'/>
+              
+              ${type == 'prefilled' ? `<input type='radio' name='${el.id}' value='present' ${el.status == 1 ? 'checked' : null}/>` : `<input type='radio' name='${el.id}' value='present'/>` }
             </td>
             <td>
-              <input type='radio' name='${el.id}' value='absent'/>
+              ${type == 'prefilled' ? `<input type='radio' name='${el.id}' value='absent' ${el.status == 0 ? 'checked' : null}/>` : `<input type='radio' name='${el.id}' value='absent'/>` }
             </td>
           </tr>
       `
         })
         .join(" ")
     studentListTbody.innerHTML = _html
+
     refresh()
   }
 
@@ -347,16 +349,49 @@ window.addEventListener("DOMContentLoaded", () => {
   searchStdBtn.addEventListener("click", async function (e) {
     e.preventDefault()
 
-    console.log(attDate.value)
     if (!attDate.value) return alert("Please Select Attendance Date!")
     if (!attDept.value) return alert("Please Select Department!")
+    if (!attSub.value) return alert("Please Select Subject")
 
     let department = attDept.value
     let year = loggedInYear
-    console.log(department, year)
 
-    getStudentsList(department, "add-attendance")
+    let isFilled = await checkIfAttendanceIsAlreadyFilled(
+      attDate.value,
+      department,
+      attSub.value,
+      year
+    )
+
+    console.log(isFilled, "-is filled")
+    if (isFilled != null) {
+      isEditAttendance = true
+      printStdAttTable(isFilled, "prefilled")
+    } else {
+      isEditAttendance = false
+      getStudentsList(department, "add-attendance")
+    }
   })
+
+  async function checkIfAttendanceIsAlreadyFilled(
+    date,
+    department,
+    subject,
+    year
+  ) {
+    let _response = await fetch("/staff/check-att-filled", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ date, department, subject, year }),
+    })
+
+    let _data = await _response.json()
+    if (_data.success) {
+      return _data.attendanceFilled == 1 ? _data.data : null
+    }
+  }
 
   addAttForm.addEventListener("submit", async function (e) {
     e.preventDefault()
@@ -385,7 +420,7 @@ window.addEventListener("DOMContentLoaded", () => {
         date: attDate.value,
         department: attDept.value,
         subject: attSub.value,
-        year: loggedInYear
+        year: loggedInYear,
       },
     })
     console.log(sendData, "-final send data")
@@ -395,10 +430,14 @@ window.addEventListener("DOMContentLoaded", () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ sendData }),
+      body: JSON.stringify({ sendData, isEditAttendance }),
     })
 
     let _data = await _response.json()
-    console.log(_data, '-after saving attendance')
+    console.log(_data, "-after saving attendance")
+    if (_data.success) {
+      alert(_data.message)
+      window.location.reload()
+    }
   })
 })

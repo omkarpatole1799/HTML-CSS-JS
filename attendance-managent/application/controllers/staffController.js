@@ -39,13 +39,11 @@ const staffController = {
     try {
       let year = req.query.year
       let department = req.query.department
-      console.log(year, department, "-this")
 
       let _studentsListResponse = await staffModel.getStudentsList(
         department,
         year
       )
-      console.log(_studentsListResponse[0], "this----")
       return res.status(200).json({
         success: true,
         status: 200,
@@ -146,8 +144,42 @@ const staffController = {
 
   saveAttendance: async (req, res, next) => {
     try {
+      if (req.body.isEditAttendance) {
+        await staffModel.deleteOldRecords(req.body.sendData)
+      }
       let _response = await staffModel.saveAttendance(req.body.sendData)
-      console.log(_response, "-after saving attendance")
+      return res.status(201).json({
+        success: true,
+        status: 201,
+        message: "Successfully Saved Attendance",
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  },
+
+  checkAttFilled: async (req, res, next) => {
+    try {
+      let _isFilled = await staffModel._isFilled(req.body)
+      let _response = await staffModel.checkAttFilled(req.body)
+      console.log(_response[0], "-this--")
+      if (_response[0].length >= 1) {
+        return res.status(200).json({
+          success: true,
+          status: 200,
+          message: "Attendance filled already",
+          attendanceFilled: _isFilled[0].length >= 1 ? 1 : 0,
+          data: _response[0],
+        })
+      } else {
+        return res.status(200).json({
+          success: true,
+          status: 200,
+          message: "Attendance Not filled already",
+          attendanceFilled: _isFilled[0].length >= 1 ? 1 : 0,
+          data: {},
+        })
+      }
     } catch (error) {
       console.log(error)
     }

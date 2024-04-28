@@ -24,5 +24,6 @@ router.post("/login", staffController.loginStaff)
 
 // attendance
 router.post('/save-attendance', staffController.saveAttendance)
+router.post('/check-att-filled', staffController.checkAttFilled)
 
 module.exports = router
