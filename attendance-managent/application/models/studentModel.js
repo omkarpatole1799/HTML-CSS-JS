@@ -18,16 +18,16 @@ const studentModel = {
                 LIMIT 1`)
   },
 
-  attPercentage: ({ studentId, date }) => {
+  attPercentage: ({ studentId, month }) => {
     // prettier-ignore
     let query = `SELECT 
-                    subject,
-                    count(date)
+                    att.subject,
+                    count(date) AS presentDays
                 FROM
-                    attendance
+                    attendance as att
                 WHERE
-                    student_id = ${studentId} AND DATE_FORMAT(date,'%m') = ${date.split("-")[1].split("")[1]} 
-                GROUP BY subject;`
+                    att.student_id = ${studentId} AND DATE_FORMAT(att.date,'%m') = ${month} 
+                GROUP BY att.subject;`
     return db.execute(query)
   },
 

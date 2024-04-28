@@ -27,8 +27,8 @@ const studentController = {
   },
   attPercentage: async (req, res, next) => {
     try {
-      console.log(req.body, "-this===")
       let _res = await studentModel.attPercentage(req.body)
+      console.log(_res, "percentage ====")
       return res.status(200).json({
         success: true,
         status: 200,
