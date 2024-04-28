@@ -27,18 +27,8 @@ const staffModel = {
     return db.execute(`DELETE FROM students where id = ?`, [+sId])
   },
 
-  getSubList: (department, year) => {
-    console.log(department, "--")
-    if (department) {
-      console.log("1")
-      return db.execute(
-        "SELECT * FROM subjects WHERE sub_department=? AND sub_year = ?",
-        [department, year]
-      )
-    } else {
-      console.log("2")
-      return db.execute("SELECT * FROM subjects")
-    }
+  getSubList: (year) => {
+    return db.execute("SELECT * FROM subjects WHERE sub_year = ?", [year])
   },
 
   addSubject: ({ formData: data }) => {

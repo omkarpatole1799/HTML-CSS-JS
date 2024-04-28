@@ -260,7 +260,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     async _printSubjectList() {
-      let _response = await fetch("/staff/subject-list")
+      let _response = await fetch(`/staff/subject-list?year=${loggedInYear}`)
       let _data = await _response.json()
 
       if (_data.data.length == 0) return

@@ -65,9 +65,8 @@ const staffController = {
   getSubList: async (req, res, next) => {
     try {
       console.log(req.query, "-query")
-      let department = req.query.department
       let year = req.query.year
-      let _subListRes = await staffModel.getSubList(department, year)
+      let _subListRes = await staffModel.getSubList(year)
       return res.status(200).json({
         success: true,
         status: 200,
@@ -108,8 +107,6 @@ const staffController = {
       console.log(error)
     }
   },
-
-  
 
   saveAttendance: async (req, res, next) => {
     try {
