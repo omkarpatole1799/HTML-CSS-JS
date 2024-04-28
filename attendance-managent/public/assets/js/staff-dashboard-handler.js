@@ -330,9 +330,8 @@ window.addEventListener("DOMContentLoaded", () => {
   })
 
   async function getSubjects(department) {
-    let _response = await fetch(
-      `/staff/subject-list?department=${department}&year=${loggedInYear}`
-    )
+    // prettier-ignore
+    let _response = await fetch(`/staff/subject-list?department=${department}&year=${loggedInYear}`)
     let _data = await _response.json()
     console.log(_data)
     if (_data.data.length == 0) {

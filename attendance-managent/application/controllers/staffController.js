@@ -40,6 +40,8 @@ const staffController = {
       let year = req.query.year
       let department = req.query.department
 
+      console.log(year, department, '-students list')
+
       let _studentsListResponse = await staffModel.getStudentsList(
         department,
         year
@@ -72,6 +74,7 @@ const staffController = {
 
   getSubList: async (req, res, next) => {
     try {
+      console.log(req.query,'-query')
       let department = req.query.department
       let year = req.query.year
       let _subListRes = await staffModel.getSubList(department, year)

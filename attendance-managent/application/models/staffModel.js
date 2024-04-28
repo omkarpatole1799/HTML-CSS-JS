@@ -28,12 +28,17 @@ const staffModel = {
   },
 
   getSubList: (department, year) => {
-    if (department)
+    console.log(department,'--')  
+    if (department) {
+      console.log("1")
       return db.execute(
-        "SELECT * FROM subjects WHERE sub_department=? AND sub_year=?",
+        "SELECT * FROM subjects WHERE sub_department=? AND sub_year = ?",
         [department, year]
       )
-    else return db.execute("SELECT * FROM subjects")
+    } else {
+      console.log("2")
+      return db.execute("SELECT * FROM subjects")
+    }
   },
 
   addSubject: ({ formData: data }) => {
