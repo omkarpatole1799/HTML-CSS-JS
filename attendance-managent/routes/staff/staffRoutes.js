@@ -5,8 +5,6 @@ const staffController = require("../../application/controllers/staffController.j
 
 const isAuth = require("../middlewares/isAuth.js")
 
-router.get("/login-page", staffController.getStaffLoginPage)
-
 router.get("/dashboard", isAuth, staffController.getStaffDashboard)
 
 router.post("/save-student", isAuth, staffController.saveStudentData)
@@ -19,11 +17,8 @@ router.get("/subject-list", isAuth, staffController.getSubList)
 router.post("/add-subject", isAuth, staffController.addSubject)
 router.delete("/delete-subject", isAuth, staffController.deleteSubject)
 
-// authentication of staff
-router.post("/login", staffController.loginStaff)
-
 // attendance
-router.post('/save-attendance', staffController.saveAttendance)
-router.post('/check-att-filled', staffController.checkAttFilled)
+router.post("/save-attendance", staffController.saveAttendance)
+router.post("/check-att-filled", staffController.checkAttFilled)
 
 module.exports = router

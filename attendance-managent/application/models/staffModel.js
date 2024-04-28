@@ -28,7 +28,7 @@ const staffModel = {
   },
 
   getSubList: (department, year) => {
-    console.log(department,'--')  
+    console.log(department, "--")
     if (department) {
       console.log("1")
       return db.execute(
@@ -61,6 +61,29 @@ const staffModel = {
       `SELECT * FROM staff_login WHERE username = ? AND password = ? LIMIT 1`,
       [userName, password]
     )
+  },
+  loginStudent: ({ userName, password }) => {
+    return db.execute(
+      `SELECT s_name, id AS username, s_mobile AS password FROM students WHERE id = ${userName} AND s_mobile = ${password} LIMIT 1`
+    )
+
+    // return db.execute(
+    //   `SELECT
+    //       stds.s_name,
+    //       stds.id AS username,
+    //       stds.s_mobile AS password,
+    //       stds.s_department,
+    //       stds.s_year,
+    //       JSON_ARRAYAGG(sub_name) AS subjects
+    //   FROM
+    //       students AS stds
+    //           JOIN
+    //       subjects AS subs
+    //   WHERE
+    //       stds.id = 1 AND s_mobile = 1 AND
+    //       subs.sub_year = 'BE'
+    //   LIMIT 1`
+    // )
   },
 
   // save attendance

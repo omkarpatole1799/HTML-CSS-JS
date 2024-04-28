@@ -2,34 +2,43 @@ window.addEventListener("DOMContentLoaded", () => {
   console.log("staff login handler loaded")
 
   let loginForm = document.querySelector("#staff-login-form")
-
+  let loginType
   loginForm.addEventListener("submit", function (e) {
     e.preventDefault()
 
     let userName = document.querySelector("#username").value
     let password = document.querySelector("#password").value
+    let isAdminType = document.querySelector("#admin-login").checked
+    let isStudentType = document.querySelector("#std-login").checked
 
-    if (!userName || !password) return showInvalidLoginDetails()
+    loginType = isAdminType ? "admin" : isStudentType ? "student" : null
 
-    getStaffLogin(userName, password)
+    if (!userName || !password || !loginType) return showInvalidLoginDetails()
+
+    getStaffLogin(userName, password, loginType)
   })
 
-  async function getStaffLogin(userName, password) {
-    let _response = await fetch("/staff/login", {
+  async function getStaffLogin(userName, password, loginType) {
+    let _response = await fetch("/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ userName, password }),
+      body: JSON.stringify({ userName, password, loginType }),
     })
 
     let _data = await _response.json()
 
     if (!_data.success) return showInvalidLoginDetails()
-    console.log(_data, '---')
+    console.log(_data, "---")
 
     if (_data.success) {
-      window.location.assign("/staff/dashboard")
+      if (loginType == "admin") {
+        window.location.assign("/staff/dashboard")
+      }
+      if (loginType == "student") {
+        window.location.assign("/student/dashboard")
+      }
     }
   }
 

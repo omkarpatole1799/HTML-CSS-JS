@@ -1,15 +1,5 @@
 const staffModel = require("../models/staffModel.js")
 const staffController = {
-  getStaffLoginPage: (req, res, next) => {
-    try {
-      if (req.session.userName && req.session.password)
-        return res.redirect("/staff/dashboard")
-      res.render("staff/staff-login.ejs")
-    } catch (error) {
-      console.log(error)
-    }
-  },
-
   getStaffDashboard: (req, res, next) => {
     try {
       res.render("staff/staff-dashboard.ejs", {
@@ -40,7 +30,7 @@ const staffController = {
       let year = req.query.year
       let department = req.query.department
 
-      console.log(year, department, '-students list')
+      console.log(year, department, "-students list")
 
       let _studentsListResponse = await staffModel.getStudentsList(
         department,
@@ -74,7 +64,7 @@ const staffController = {
 
   getSubList: async (req, res, next) => {
     try {
-      console.log(req.query,'-query')
+      console.log(req.query, "-query")
       let department = req.query.department
       let year = req.query.year
       let _subListRes = await staffModel.getSubList(department, year)
@@ -119,31 +109,7 @@ const staffController = {
     }
   },
 
-  // staff authentication
-  loginStaff: async (req, res, next) => {
-    try {
-      let _staffLoginDetails = await staffModel.loginStaff(req.body)
-
-      if (_staffLoginDetails[0].length == 0) {
-        return res.status(401).json({
-          success: false,
-          status: 401,
-          message: "Unauthorized",
-        })
-      }
-      if (_staffLoginDetails[0].length >= 1) {
-        req.session.userName = _staffLoginDetails[0][0].username
-        req.session.password = _staffLoginDetails[0][0].password
-        return res.status(200).json({
-          success: true,
-          status: 200,
-          message: "Authorized",
-        })
-      }
-    } catch (error) {
-      console.log(error)
-    }
-  },
+  
 
   saveAttendance: async (req, res, next) => {
     try {
