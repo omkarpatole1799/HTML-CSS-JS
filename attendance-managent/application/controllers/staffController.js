@@ -174,6 +174,20 @@ const staffController = {
       console.log(error)
     }
   },
+
+  attReportMonthly: async (req, res, next) => {
+    try {
+      let _res = await staffModel.attReportMonthly(req.body)
+      console.log(_res[0], "-here")
+      return res.status(200).json({
+        success: true,
+        status: 200,
+        data: _res[0],
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  },
 }
 
 module.exports = staffController

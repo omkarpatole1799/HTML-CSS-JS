@@ -23,4 +23,6 @@ router.post("/check-att-filled", staffController.checkAttFilled)
 
 router.delete('/delete-previous-attendance', staffController.deletePreviousAtt)
 
+router.post('/att-report-monthly', staffController.attReportMonthly)
+
 module.exports = router

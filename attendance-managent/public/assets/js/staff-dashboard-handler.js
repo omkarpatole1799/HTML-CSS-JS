@@ -33,6 +33,21 @@ window.addEventListener("DOMContentLoaded", () => {
   let addSubBtn = document.querySelector(".add-sub-btn")
   let subListBtn = document.querySelector(".sub-list-btn")
   let addAttBtn = document.querySelector(".add-att-btn")
+  let attReportPrintBtn = document.querySelector(".print-att-report-btn")
+
+  document
+      .querySelector(".att-report-print-table")
+      .classList.add("container")
+
+  attReportPrintBtn.addEventListener("click", function (e) {
+    e.preventDefault()
+    document
+      .querySelector(".att-report-print-table")
+      .classList.remove("container")
+    window.print()
+  })
+
+  
 
   stdListBtn.addEventListener("click", e => {
     e.preventDefault()
@@ -136,6 +151,40 @@ window.addEventListener("DOMContentLoaded", () => {
       if (type == "list-only") printStudentsTable(studentsListAll)
       if (type == "add-attendance") printStdAttTable(studentsListAll)
     }
+  }
+
+  function printAttReportTable(list, reportMonth) {
+    let studentListTbody = document.querySelector(".att-report-tbody")
+    let _html
+    if (list.length == 0)
+      _html = `<tr class='text-center'><td colspan='7'>Nothing But Crickets!!!</td></tr>`
+    else {
+      _html = list
+        .map((el, i) => {
+          // prettier-ignore
+          let totalPresentDays = el.att_status.filter(el=> el != 0)
+          console.log(totalPresentDays, "present days")
+          let totalDays = new Date(
+            new Date().getFullYear(),
+            reportMonth,
+            0
+          ).getDate()
+          // prettier-ignore
+          let percentage = ((totalPresentDays.length / totalDays) * 100).toFixed(1)
+
+          return `
+          <tr class="text-center">
+            <th>${i + 1}</th>
+            <th>${el.id}</th>
+            <th>${el.s_name}</th>
+            <th>${percentage}%</th>
+          </tr>
+        `
+        })
+        .join("")
+    }
+
+    studentListTbody.innerHTML = _html
   }
 
   function printStudentsTable(list) {
@@ -387,6 +436,7 @@ window.addEventListener("DOMContentLoaded", () => {
   let addAttForm = document.querySelector("#add-att-form")
   let attDept = document.querySelector("#att-dept")
   let searchStdBtn = document.querySelector("#search-std-btn")
+  let attReportBtn = document.querySelector("#att-report-btn")
   let attSub = document.querySelector("#att-sub")
   let attDate = document.querySelector("#att-date")
 
@@ -445,6 +495,45 @@ window.addEventListener("DOMContentLoaded", () => {
       isEditAttendance = false
       getStudentsList(department, "add-attendance")
     }
+  })
+
+  attReportBtn.addEventListener("click", async function (e) {
+    e.preventDefault()
+
+    if (!attDate.value) {
+      toast("Please Select Attendance Date!")
+      return false
+    }
+    if (!attDept.value) {
+      toast("Please Select Department!")
+      return false
+    }
+    if (!attSub.value) {
+      toast("Please Select Subject")
+      return false
+    }
+
+    let _res = await fetch("/staff/att-report-monthly", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        attDate: attDate.value,
+        attDept: attDept.value,
+        attSub: attSub.value,
+        attYear: loggedInYear,
+      }),
+    })
+    let _data = await _res.json()
+    console.log(_data, "-this")
+    let reportMonth = attDate.value.split("-")[1].split("")[1]
+    let reportYear = attDate.value.split("-")[0]
+
+    document.querySelector(
+      ".att-report-date"
+    ).innerHTML = `(${reportMonth}/${reportYear})-(${attSub.value})-(${attDept.value})`
+    printAttReportTable(_data.data, reportMonth)
   })
 
   async function checkIfAttendanceIsAlreadyFilled(

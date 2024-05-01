@@ -165,6 +165,30 @@ const staffModel = {
     console.log(query, "-query")
     return db.execute(query)
   },
+
+  attReportMonthly: async ({ attDate, attDept, attSub, attYear }) => {
+    let query = `
+                    SELECT 
+                    std.id,
+                    std.s_name,
+                    std.s_department,
+                    att.subject,
+                    json_arrayagg(status) AS att_status
+                FROM
+                  attendance AS att
+                        INNER JOIN
+                    students AS std ON att.student_id = std.id
+                WHERE
+                            department = '${attDept}'
+                        AND subject = '${attSub}'
+                        AND DATE_FORMAT(date, '%m') = ${
+                          attDate.split("-")[1].split("")[1]
+                        }
+                        AND att.year = '${attYear}'
+                GROUP BY std.id
+                ORDER BY att.date , std.id;`
+    return db.execute(query)
+  },
 }
 
 module.exports = staffModel
