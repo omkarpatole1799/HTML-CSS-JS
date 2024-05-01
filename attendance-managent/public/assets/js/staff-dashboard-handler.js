@@ -229,7 +229,7 @@ window.addEventListener("DOMContentLoaded", () => {
     if (list.length == 0) _html = `<tr><td colspan='5'>Nothing But Crickets!!!</td></tr>`
     else
       // prettier-ignore
-      _html += list
+      _html = list
         .map((el, i) => {
           return `
           <tr class='text-center'>
