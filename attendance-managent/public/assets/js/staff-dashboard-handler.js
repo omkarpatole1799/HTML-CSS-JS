@@ -1,5 +1,11 @@
 window.addEventListener("DOMContentLoaded", () => {
   console.log("staff-dashboard-handler.js loaded")
+
+  Toastify({
+    text: `Welcome, Admin ${loggedInYear}`,
+    duration: 4000,
+  }).showToast()
+
   let isEditAttendance = false
   hideEl([
     ".students-list",
@@ -166,10 +172,15 @@ window.addEventListener("DOMContentLoaded", () => {
   function printStdAttTable(list, type = "not-filled") {
     let studentListTbody = document.querySelector(".add-att-form-tbody")
     let _html
+    if (type == "prefilled") {
+      showPrefilledAttendanceWarning()
+    } else {
+      hidePrefilledAttendanceWarning()
+    }
     if (list.length == 0) _html = `<tr><td colspan='5'>Nothing But Crickets!!!</td></tr>`
     else
       // prettier-ignore
-      _html = list
+      _html += list
         .map((el, i) => {
           return `
           <tr class='text-center'>
@@ -177,7 +188,6 @@ window.addEventListener("DOMContentLoaded", () => {
             <td>${el.id}</td>
             <td>${el.s_name}</td>
             <td>
-              
               ${type == 'prefilled' ? `<input type='radio' name='${el.id}' value='present' ${el.status == 1 ? 'checked' : null}/>` : `<input type='radio' name='${el.id}' value='present'/>` }
             </td>
             <td>
@@ -192,6 +202,56 @@ window.addEventListener("DOMContentLoaded", () => {
     refresh()
   }
 
+  function showPrefilledAttendanceWarning() {
+    document
+      .querySelector(".already-filled-attendance-warning")
+      .classList.remove("d-none")
+  }
+
+  function hidePrefilledAttendanceWarning() {
+    document
+      .querySelector(".already-filled-attendance-warning")
+      .classList.add("d-none")
+  }
+
+  let alreadyFilledAttDeleteBtn = document.querySelector(
+    ".delete-already-filled-attendance-btn"
+  )
+  alreadyFilledAttDeleteBtn.addEventListener("click", async function (e) {
+    e.preventDefault()
+    let deleteAttId = isFilled.filter(el => {
+      if (el.attendance_id !== null || el.attendance_id !== undefined) {
+        return el.attendance_id
+      }
+    })
+    console.log(deleteAttId, "--tt--")
+
+    let _res = await fetch("/staff/delete-previous-attendance", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ deleteAttId }),
+    })
+
+    let _data = await _res.json()
+    console.log(_data)
+
+    if (_data.success) {
+      Toastify({
+        text: _data.message,
+        duration: 3000,
+      }).showToast()
+
+      let updatedAttendance = isFilled.map(el => {
+        el.status = null
+        return el
+      })
+      printStdAttTable(updatedAttendance, "prefilled")
+    }
+    hidePrefilledAttendanceWarning()
+  })
+
   function refresh() {
     deleteStudBtn = document.querySelectorAll(".delete-student-btn")
     deleteStudent()
@@ -205,7 +265,12 @@ window.addEventListener("DOMContentLoaded", () => {
         if (!confirm(`Do you want to delete student id = ${deleteId}`))
           return false
 
-        if (!deleteId) return alert("Invalid student ID")
+        if (!deleteId) {
+          Toastify({
+            text: "Invalid student ID",
+            duration: 3000,
+          }).showToast()
+        }
 
         let _response = await fetch("/staff/delete-student", {
           method: "DELETE",
@@ -326,6 +391,7 @@ window.addEventListener("DOMContentLoaded", () => {
   let attDate = document.querySelector("#att-date")
 
   attDept.addEventListener("change", function () {
+    hidePrefilledAttendanceWarning()
     getSubjects(this.value)
   })
 
@@ -345,24 +411,33 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  let isFilled = null
   searchStdBtn.addEventListener("click", async function (e) {
     e.preventDefault()
 
-    if (!attDate.value) return alert("Please Select Attendance Date!")
-    if (!attDept.value) return alert("Please Select Department!")
-    if (!attSub.value) return alert("Please Select Subject")
+    if (!attDate.value) {
+      toast("Please Select Attendance Date!")
+      return false
+    }
+    if (!attDept.value) {
+      toast("Please Select Department!")
+      return false
+    }
+    if (!attSub.value) {
+      toast("Please Select Subject")
+      return false
+    }
 
     let department = attDept.value
     let year = loggedInYear
 
-    let isFilled = await checkIfAttendanceIsAlreadyFilled(
+    isFilled = await checkIfAttendanceIsAlreadyFilled(
       attDate.value,
       department,
       attSub.value,
       year
     )
 
-    console.log(isFilled, "-is filled")
     if (isFilled != null) {
       isEditAttendance = true
       printStdAttTable(isFilled, "prefilled")
@@ -394,9 +469,18 @@ window.addEventListener("DOMContentLoaded", () => {
 
   addAttForm.addEventListener("submit", async function (e) {
     e.preventDefault()
-    if (!attDate.value) return alert("Please Select Attendance Date!")
-    if (!attDept.value) return alert("Please Select Department!")
-    if (!attSub.value) return alert("Please Select Subject")
+    if (!attDate.value) {
+      toast("Please Select Attendance Date!")
+      return false
+    }
+    if (!attDept.value) {
+      toast("Please Select Department!")
+      return false
+    }
+    if (!attSub.value) {
+      toast("Please Select Subject")
+      return false
+    }
 
     let formData = new FormData(this)
     let sendData = []
@@ -422,7 +506,6 @@ window.addEventListener("DOMContentLoaded", () => {
         year: loggedInYear,
       },
     })
-    console.log(sendData, "-final send data")
 
     let _response = await fetch("/staff/save-attendance", {
       method: "POST",
@@ -433,10 +516,15 @@ window.addEventListener("DOMContentLoaded", () => {
     })
 
     let _data = await _response.json()
-    console.log(_data, "-after saving attendance")
     if (_data.success) {
-      alert(_data.message)
-      window.location.reload()
+      Toastify({
+        text: _data.message,
+        duration: 3000,
+      }).showToast()
+
+      setTimeout(() => {
+        window.location.reload()
+      }, 3500)
     }
   })
 })

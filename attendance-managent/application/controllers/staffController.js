@@ -66,7 +66,9 @@ const staffController = {
     try {
       console.log(req.query, "-query")
       let year = req.query.year
-      let _subListRes = await staffModel.getSubList(year)
+      let department = req.query.department
+      console.log(department, "-department")
+      let _subListRes = await staffModel.getSubList(year, department)
       return res.status(200).json({
         success: true,
         status: 200,
@@ -144,6 +146,28 @@ const staffController = {
           message: "Attendance Not filled already",
           attendanceFilled: _isFilled[0].length >= 1 ? 1 : 0,
           data: {},
+        })
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  },
+
+  deletePreviousAtt: async (req, res, next) => {
+    try {
+      let _res = await staffModel.deletePreviousAtt(req.body)
+      console.log(_res, "-delete-previous-attendance response ")
+      if (_res[0].affectedRows >= 1) {
+        return res.status(200).json({
+          success: true,
+          status: 200,
+          message: "Deleted attendance successful",
+        })
+      } else {
+        return res.status(200).json({
+          success: false,
+          status: 400,
+          message: "Deleted attendance unsuccessful",
         })
       }
     } catch (error) {

@@ -21,4 +21,6 @@ router.delete("/delete-subject", isAuth, staffController.deleteSubject)
 router.post("/save-attendance", staffController.saveAttendance)
 router.post("/check-att-filled", staffController.checkAttFilled)
 
+router.delete('/delete-previous-attendance', staffController.deletePreviousAtt)
+
 module.exports = router

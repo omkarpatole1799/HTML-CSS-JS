@@ -1,8 +1,13 @@
 window.addEventListener("DOMContentLoaded", () => {
-  console.log("staff login handler loaded")
-
   let loginForm = document.querySelector("#staff-login-form")
   let loginType
+
+  Toastify({
+    text: "Welcome!!!",
+    duration: 3000,
+    position: "center",
+  }).showToast()
+
   loginForm.addEventListener("submit", function (e) {
     e.preventDefault()
 
@@ -30,7 +35,6 @@ window.addEventListener("DOMContentLoaded", () => {
     let _data = await _response.json()
 
     if (!_data.success) return showInvalidLoginDetails()
-    console.log(_data, "---")
 
     if (_data.success) {
       if (loginType == "admin") {
@@ -39,11 +43,18 @@ window.addEventListener("DOMContentLoaded", () => {
       if (loginType == "student") {
         window.location.assign("/student/dashboard")
       }
+    } 
+
+    if (!_data.success) {
+      showInvalidLoginDetails()
     }
   }
 
   function showInvalidLoginDetails() {
-    showEl([".invalid-login-message"])
-    setTimeout(() => hideEl([".invalid-login-message"]), 1400)
+    Toastify({
+      text: "Invalid Login Details",
+      duration: 3000,
+      position: "center",
+    }).showToast()
   }
 })

@@ -27,8 +27,15 @@ const staffModel = {
     return db.execute(`DELETE FROM students where id = ?`, [+sId])
   },
 
-  getSubList: (year) => {
-    return db.execute("SELECT * FROM subjects WHERE sub_year = ?", [year])
+  getSubList: (year, department) => {
+    if (department) {
+      return db.execute(
+        "SELECT * FROM subjects WHERE sub_year =? AND sub_department = ?",
+        [year, department.toLowerCase()]
+      )
+    } else {
+      return db.execute("SELECT * FROM subjects WHERE sub_year = ?", [year])
+    }
   },
 
   addSubject: ({ formData: data }) => {
@@ -54,7 +61,7 @@ const staffModel = {
   },
   loginStudent: ({ userName, password }) => {
     return db.execute(
-      `SELECT s_name, id AS username, s_mobile AS password FROM students WHERE id = ${userName} AND s_mobile = ${password} LIMIT 1`
+      `SELECT s_name, id AS username, s_mobile AS password FROM students WHERE id = '${userName}' AND s_mobile = '${password}' LIMIT 1`
     )
 
     // return db.execute(
@@ -149,6 +156,14 @@ const staffModel = {
       data.date,
       data.subject,
     ])
+  },
+
+  deletePreviousAtt: async data => {
+    let id = data.deleteAttId.map(el => el.attendance_id)
+    console.log(id)
+    let query = `DELETE FROM attendance WHERE id in (${[...id]})`
+    console.log(query, "-query")
+    return db.execute(query)
   },
 }
 

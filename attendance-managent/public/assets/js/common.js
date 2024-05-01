@@ -1,6 +1,5 @@
 console.log("Common js loaded")
 
-
 function showEl(elements) {
   elements.forEach(el => {
     document.querySelectorAll(`${el}`).forEach(el => {
@@ -19,4 +18,14 @@ function hideEl(elements) {
 
     // document.querySelectorAll(`${el}`).classList.add("hidden")
   })
+}
+
+function toast(msg) {
+  Toastify({
+    text: msg,
+    duration: 3000,
+    close: true,
+    position: "center",
+    stopOnFocus: "true",
+  }).showToast()
 }
