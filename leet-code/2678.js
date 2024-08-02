@@ -13,12 +13,18 @@ function checkMoreThanSixty(list) {
   // return returnList.length;
 
   // sol2
+  // let count = 0;
+  // list.forEach(el => {
+  //   const age = el.slice(11, 13);
+  //   if (age > 60) count += 1;
+  // });
+
+  // sol 3
   let count = 0;
   list.forEach(el => {
-    const age = el.slice(11, 13);
+    const age = el.substr(11, 2);
     if (age > 60) count += 1;
   });
-
   return count;
 }
 
