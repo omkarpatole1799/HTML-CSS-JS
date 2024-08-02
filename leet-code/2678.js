@@ -23,7 +23,9 @@ function checkMoreThanSixty(list) {
   let count = 0;
   list.forEach(el => {
     const age = el.substr(11, 2);
-    if (age > 60) count += 1;
+    if (age > 60) {
+      count += 1;
+    }
   });
   return count;
 }
