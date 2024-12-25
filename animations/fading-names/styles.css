@@ -1,0 +1,64 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Courier New", Courier, monospace;
+}
+
+.name-container {
+  background-color: rgb(109, 155, 63);
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & span {
+    font-size: 60px;
+    font-weight: bold;
+    letter-spacing: 10px;
+    color: rgb(75, 75, 75);
+  }
+}
+
+.name-container span {
+  animation: fading 3000ms infinite;
+
+  &:nth-child(1) {
+    animation-delay: 200ms;
+  }
+
+  &:nth-child(2) {
+    animation-delay: 350ms;
+  }
+
+  &:nth-child(3) {
+    animation-delay: 150ms;
+  }
+
+  &:nth-child(4) {
+    animation-delay: 550ms;
+  }
+
+  &:nth-child(5) {
+    animation-delay: 350ms;
+  }
+}
+
+@keyframes fading {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 100%;
+  }
+
+  100% {
+    opacity: 0%;
+  }
+}
