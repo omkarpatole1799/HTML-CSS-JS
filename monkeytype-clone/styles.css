@@ -31,5 +31,22 @@ body {
 .word {
   letter-spacing: 1px;
   color: var(--sub-color);
-  display: inline;
+  display: inline-block;
+  /* padding: 0 5px; */
+}
+
+.letter {
+  display: inline-block;
+}
+
+.space {
+  padding: 0 2px;
+}
+
+.letter.correct {
+  color: #fff;
+}
+
+.letter.incorrect {
+  color: rgb(255, 72, 55);
 }
