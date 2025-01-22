@@ -60,10 +60,19 @@ document.addEventListener("keyup", function (e) {
   }
 
   if (isSpace) {
-      removeClass(currentWord, "current");
-      removeClass(currentLetter, "current");
-      addClass(currentWord.nextSibling, "current");
-      addClass(document.querySelector(".word.current .letter"), "current");
+    const lettersToMarkIncorrect = [
+      ...document.querySelectorAll(".word.current .letter:not(.correct)"),
+    ];
+    console.log(lettersToMarkIncorrect, "==lettersToMarkIncorrect==");
+    if (lettersToMarkIncorrect) {
+      lettersToMarkIncorrect.forEach(letter => {
+        addClass(letter, "incorrect");
+      });
+    }
+    removeClass(currentWord, "current");
+    removeClass(currentLetter, "current");
+    addClass(currentWord.nextSibling, "current");
+    addClass(document.querySelector(".word.current .letter"), "current");
   }
 });
 
