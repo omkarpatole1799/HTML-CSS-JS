@@ -1,79 +1,146 @@
-const typingContainer = document.querySelector("#quote");
 const paragraph =
-  "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore accusantium sequi recusandae. Nihil delectus, vel in obcaecati corrupti odit voluptatem quas, sed provident dolorum ipsa animi atque. Ab aut nobis nostrum molestiae exercitationem sapiente voluptatibus, velit modi libero quasi porro. Odit aliquid neque quibusdam nisi nihil repellendus quo corrupti tenetur!";
+  "lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore accusantium sequi recusandae. Nihil delectus, vel in obcaecati corrupti odit voluptatem quas, sed provident dolorum ipsa animi atque. Ab aut nobis nostrum molestiae exercitationem sapiente voluptatibus, velit modi libero quasi porro. Odit aliquid neque quibusdam nisi nihil repellendus quo corrupti tenetur!";
 
-function addClass(el, className) {
-  el.classList.add(className);
-}
+class NewTypingGame {
+  typingContainer = null;
+  currentWord = null;
+  currentLEtter = null;
 
-function removeClass(el, className) {
-  el.classList.remove(className);
-}
+  constructor() {
+    this.typingContainer = document.querySelector("#quote");
 
-function formatWord(word) {
-  // Add a span for each letter and a space at the end
-  return `<div class="word">${formatLetter(
-    word
-  )}<span class="letter space"> </span></div>`;
-}
-
-function formatLetter(word) {
-  let html = "";
-  word.split("").forEach(letter => {
-    html += `<span class="letter">${letter}</span>`;
-  });
-  return html;
-}
-
-function newGame() {
-  typingContainer.innerHTML = "";
-  paragraph.split(" ").forEach(word => {
-    typingContainer.innerHTML += formatWord(word);
-    // typingContainer.innerHTML += " ";
-  });
-
-  addClass(document.querySelector(".word"), "current");
-  addClass(document.querySelector(".letter"), "current");
-}
-
-document.addEventListener("keyup", function (e) {
-  const key = e.key;
-  const currentLetter = document.querySelector(".letter.current");
-  const currentWord = document.querySelector(".word.current");
-
-  // console.log(currentLetter, "==currentLetter==");
-  // console.log(currentWord, "currentWord");
-
-  const expectedLetter = currentLetter.innerHTML;
-
-  console.log(expectedLetter, "==expectedLetter==");
-
-  const isLetter = key.length === 1 && key !== " ";
-  const isSpace = key === " ";
-
-  if (isLetter) {
-    if (currentLetter) {
-      addClass(currentLetter, key === expectedLetter ? "correct" : "incorrect");
-      removeClass(currentLetter, "current");
-      addClass(currentLetter.nextSibling, "current");
-    }
+    this.startNew();
+    document.addEventListener("keyup", this._handleTyping.bind(this));
   }
 
-  if (isSpace) {
-    const lettersToMarkIncorrect = [
-      ...document.querySelectorAll(".word.current .letter:not(.correct)"),
-    ];
-    console.log(lettersToMarkIncorrect, "==lettersToMarkIncorrect==");
-    if (lettersToMarkIncorrect) {
-      lettersToMarkIncorrect.forEach(letter => {
-        addClass(letter, "incorrect");
-      });
-    }
-    removeClass(currentWord, "current");
-    removeClass(currentLetter, "current");
-    addClass(currentWord.nextSibling, "current");
-    addClass(document.querySelector(".word.current .letter"), "current");
+  startNew() {
+    this.typingContainer.innerHTML = "";
+    paragraph.split(" ").forEach(word => {
+      this.typingContainer.innerHTML += this._formatWord(word);
+    });
+
+    this._addClass(document.querySelector(".word"), ["current"]);
+    this._addClass(document.querySelector(".letter"), ["current"]);
   }
+
+  _addClass(el, className) {
+    className.forEach(_class => {
+      if (!el) return;
+      el.classList.add(_class);
+    });
+  }
+
+  _removeClass(el, className) {
+    className.forEach(_class => {
+      if (!el) return;
+      el.classList.remove(_class);
+    });
+  }
+
+  _formatWord(word) {
+    // Add a span for each letter and a space at the end
+    return `<div class="word">${this._formatLetter(
+      word
+    )}<span class="space letter"></span></div>`;
+  }
+
+  _formatLetter(word) {
+    return word
+      .split("")
+      .map(letter => {
+        return `<span class="letter">${letter}</span>`;
+      })
+      .join("");
+  }
+
+  _jumpToNextWord()  {
+
+  }
+
+  _handleTyping(e) {
+    const key = e.key;
+    this.currentLetter = document.querySelector(".letter.current");
+    this.currentWord = document.querySelector(".word.current");
+
+    const expectedLetter = this.currentLetter?.innerHTML;
+
+    console.log(expectedLetter, "==expectedLetter==");
+
+    const isLetter = key.length === 1 && key !== " ";
+    const isSpaceKey = key === " ";
+    const isBackspace = key === "Backspace";
+
+    if (isLetter && expectedLetter) {
+      if (this.currentLetter) {
+        this._addClass(
+          this.currentLetter,
+          key === expectedLetter ? ["correct"] : ["incorrect"]
+        );
+        this._removeClass(this.currentLetter, ["current"]);
+        this._addClass(this.currentLetter?.nextSibling, ["current"]);
+      }
+    }
+
+    if (isSpaceKey) {
+      const lettersToMarkIncorrect = [
+        ...document.querySelectorAll(".word.current .letter:not(.correct)"),
+      ];
+      if (lettersToMarkIncorrect) {
+        lettersToMarkIncorrect.forEach(letter => {
+          this._addClass(letter, ["incorrect"]);
+        });
+      }
+
+      this._removeClass(this.currentWord, ["current"]);
+      this._removeClass(this.currentLetter, ["current"]);
+
+      this._addClass(this.currentWord.nextElementSibling, ["current"]);
+      this._addClass(this.currentWord.nextElementSibling.firstElementChild, [
+        "current",
+      ]);
+    }
+
+    if (isBackspace) {
+      // TODO: (Omkar) if all letters are correct for current word dont allow backspace
+
+      const isPreviousSiblingAvailable =
+        this.currentLetter?.previousElementSibling;
+      console.log(isPreviousSiblingAvailable, "==isPreviousSiblingAvailable==");
+      if (isPreviousSiblingAvailable) {
+        this._removeClass(this.currentLetter, [
+          "correct",
+          "incorrect",
+          "current",
+        ]);
+        this._addClass(this.currentLetter.previousElementSibling, ["current"]);
+        this._removeClass(this.currentLetter.previousElementSibling, [
+          "correct",
+          "incorrect",
+        ]);
+      } else {
+        // check any incorrect words in previous word
+        const previousWord = this.currentWord.previousElementSibling;
+        if (previousWord) {
+          this._removeClass(this.currentWord, ["current"]);
+          this._removeClass(this.currentLetter, [
+            "current",
+            "correct",
+            "incorrect",
+          ]);
+
+          this._addClass(previousWord, ["current"]);
+          this._addClass(previousWord.lastElementChild, ["current"]);
+          this._removeClass(previousWord.lastElementChild, [
+            "correct",
+            "incorrect",
+          ]);
+        }
+      }
+    }
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const newGame = new NewTypingGame();
+  newGame();
 });
-
-newGame();

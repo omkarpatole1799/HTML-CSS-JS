@@ -26,13 +26,14 @@ body {
 
 .container {
   padding: 3rem 5rem;
+  position: relative;
 }
 
 .word {
   letter-spacing: 1px;
   color: var(--sub-color);
   display: inline-block;
-  /* padding: 0 5px; */
+  /* margin: 0 5px; */
 }
 
 .letter {
@@ -40,7 +41,9 @@ body {
 }
 
 .space {
-  padding: 0 2px;
+  margin-right: 5px;
+  height: 20px;
+  display: inline-block;
 }
 
 .letter.correct {
@@ -49,4 +52,36 @@ body {
 
 .letter.incorrect {
   color: rgb(255, 72, 55);
+}
+
+.letter.current {
+  position: relative;
+}
+
+.letter.current::before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  content: " ";
+  width: 1ch;
+  height: 100%;
+  background-color: rgba(255, 255, 0, 0.562);
+
+  animation: blink-cursor infinite 600ms;
+}
+
+@keyframes blink-cursor {
+  0% {
+    opacity: 0;
+    height: 20%;
+  }
+  50% {
+    opacity: 1;
+    height: 100%;
+  }
+  100% {
+    opacity: 0;
+    height: 20%;
+  }
 }
