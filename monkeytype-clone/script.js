@@ -4,13 +4,13 @@ const paragraph =
 class NewTypingGame {
   typingContainer = null;
   currentWord = null;
-  currentLEtter = null;
+  currentLetter = null;
 
   constructor() {
     this.typingContainer = document.querySelector("#quote");
 
     this.startNew();
-    document.addEventListener("keyup", this._handleTyping.bind(this));
+    document.addEventListener("keydown", this._handleTyping.bind(this));
   }
 
   startNew() {
@@ -53,22 +53,76 @@ class NewTypingGame {
       .join("");
   }
 
-  _jumpToNextWord()  {
+  _isCtrlBackspace(e) {
+    if (e.ctrlKey && e.key === "Backspace") {
+      return true;
+    }
+    return false;
+  }
 
+  _isCurrentWordAllCorrect() {
+    if (this.currentWord) {
+      const isAnyIncorrectInPreviousWord = [
+        ...this.currentWord.querySelectorAll(".letter.incorrect:not(.space)"),
+      ];
+      console.log(
+        isAnyIncorrectInPreviousWord,
+        "==isAnyIncorrectInPreviousWord=="
+      );
+      return false;
+    }
+    return true;
+  }
+
+  _isPreviousWordAllCorrect() {
+    if (this.currentWord?.previousElementSibling) {
+      const isAnyIncorrectInPreviousWord = [
+        ...this.currentWord.previousElementSibling.querySelectorAll(
+          ".letter.incorrect:not(.space)"
+        ),
+      ];
+      console.log(
+        isAnyIncorrectInPreviousWord,
+        "==isAnyIncorrectInPreviousWord=="
+      );
+      return false;
+    }
+    return true;
   }
 
   _handleTyping(e) {
     const key = e.key;
+
     this.currentLetter = document.querySelector(".letter.current");
     this.currentWord = document.querySelector(".word.current");
 
     const expectedLetter = this.currentLetter?.innerHTML;
 
-    console.log(expectedLetter, "==expectedLetter==");
+    console.log(expectedLetter.length, "==expectedLetter==");
 
     const isLetter = key.length === 1 && key !== " ";
     const isSpaceKey = key === " ";
     const isBackspace = key === "Backspace";
+
+    if (this._isCtrlBackspace(e)) {
+      this.currentWord.querySelectorAll(".letter").forEach(_el => {
+        console.log(_el, "==_el==");
+        this._removeClass(_el, ["current", "correct", "incorrect"]);
+      });
+      const previousWord = this.currentWord.previousElementSibling;
+
+      // check is there is previous word
+
+      if (previousWord) {
+        this._removeClass(this.currentWord, ["current"]);
+        this._addClass(previousWord, ["current"]);
+        this._addClass(previousWord.lastElementChild, ["current"]);
+      } else {
+        this._addClass(this.currentWord.firstElementChild, ["current"]);
+      }
+
+      return;
+    }
 
     if (isLetter && expectedLetter) {
       if (this.currentLetter) {
@@ -106,6 +160,9 @@ class NewTypingGame {
       const isPreviousSiblingAvailable =
         this.currentLetter?.previousElementSibling;
       console.log(isPreviousSiblingAvailable, "==isPreviousSiblingAvailable==");
+
+      // const isPreviousSpace = this.currentLetter
+
       if (isPreviousSiblingAvailable) {
         this._removeClass(this.currentLetter, [
           "correct",
@@ -117,30 +174,30 @@ class NewTypingGame {
           "correct",
           "incorrect",
         ]);
-      } else {
-        // check any incorrect words in previous word
-        const previousWord = this.currentWord.previousElementSibling;
-        if (previousWord) {
-          this._removeClass(this.currentWord, ["current"]);
-          this._removeClass(this.currentLetter, [
-            "current",
-            "correct",
-            "incorrect",
-          ]);
+        return;
+      }
 
-          this._addClass(previousWord, ["current"]);
-          this._addClass(previousWord.lastElementChild, ["current"]);
-          this._removeClass(previousWord.lastElementChild, [
-            "correct",
-            "incorrect",
-          ]);
-        }
+      const previousWord = this.currentWord.previousElementSibling;
+      console.log(previousWord, "==previousWord==");
+      if (previousWord) {
+        this._removeClass(this.currentWord, ["current"]);
+        this._removeClass(this.currentLetter, [
+          "current",
+          "correct",
+          "incorrect",
+        ]);
+
+        this._addClass(previousWord, ["current"]);
+        this._addClass(previousWord.lastElementChild, ["current"]);
+        this._removeClass(previousWord.lastElementChild, [
+          "correct",
+          "incorrect",
+        ]);
       }
     }
   }
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  const newGame = new NewTypingGame();
-  newGame();
+  new NewTypingGame();
 });
