@@ -90,6 +90,96 @@ class NewTypingGame {
     return true;
   }
 
+  _handleCtrlBackspace() {
+    this.currentWord.querySelectorAll(".letter").forEach(_el => {
+      console.log(_el, "==_el==");
+      this._removeClass(_el, ["current", "correct", "incorrect"]);
+    });
+
+    // check is there is previous word
+    const previousWord = this.currentWord.previousElementSibling;
+
+    if (previousWord) {
+      this._removeClass(this.currentWord, ["current"]);
+      this._addClass(previousWord, ["current"]);
+      this._addClass(previousWord.lastElementChild, ["current"]);
+    } else {
+      this._addClass(this.currentWord.firstElementChild, ["current"]);
+    }
+  }
+
+  _handleSpaceKey() {
+    const lettersToMarkIncorrect = [
+      ...document.querySelectorAll(".word.current .letter:not(.correct)"),
+    ];
+    if (lettersToMarkIncorrect) {
+      lettersToMarkIncorrect.forEach(letter => {
+        this._addClass(letter, ["incorrect"]);
+      });
+    }
+
+    this._removeClass(this.currentWord, ["current"]);
+    this._removeClass(this.currentLetter, ["current"]);
+
+    this._addClass(this.currentWord.nextElementSibling, ["current"]);
+    this._addClass(this.currentWord.nextElementSibling.firstElementChild, [
+      "current",
+    ]);
+  }
+
+  _handleBackspacKey() {
+    // TODO: (Omkar) if all letters are correct for current word dont allow backspace
+
+    const isPreviousSiblingAvailable =
+      this.currentLetter?.previousElementSibling;
+    console.log(isPreviousSiblingAvailable, "==isPreviousSiblingAvailable==");
+
+    // const isPreviousSpace = this.currentLetter
+
+    if (isPreviousSiblingAvailable) {
+      this._removeClass(this.currentLetter, [
+        "correct",
+        "incorrect",
+        "current",
+      ]);
+      this._addClass(this.currentLetter.previousElementSibling, ["current"]);
+      this._removeClass(this.currentLetter.previousElementSibling, [
+        "correct",
+        "incorrect",
+      ]);
+      return;
+    }
+
+    const previousWord = this.currentWord.previousElementSibling;
+    console.log(previousWord, "==previousWord==");
+    if (previousWord) {
+      this._removeClass(this.currentWord, ["current"]);
+      this._removeClass(this.currentLetter, [
+        "current",
+        "correct",
+        "incorrect",
+      ]);
+
+      this._addClass(previousWord, ["current"]);
+      this._addClass(previousWord.lastElementChild, ["current"]);
+      this._removeClass(previousWord.lastElementChild, [
+        "correct",
+        "incorrect",
+      ]);
+    }
+  }
+
+  _handleLetterChecking(key, expectedLetter) {
+    if (this.currentLetter) {
+      this._addClass(
+        this.currentLetter,
+        key === expectedLetter ? ["correct"] : ["incorrect"]
+      );
+      this._removeClass(this.currentLetter, ["current"]);
+      this._addClass(this.currentLetter?.nextSibling, ["current"]);
+    }
+  }
+
   _handleTyping(e) {
     const key = e.key;
 
@@ -98,102 +188,25 @@ class NewTypingGame {
 
     const expectedLetter = this.currentLetter?.innerHTML;
 
-    console.log(expectedLetter.length, "==expectedLetter==");
-
     const isLetter = key.length === 1 && key !== " ";
     const isSpaceKey = key === " ";
     const isBackspace = key === "Backspace";
 
     if (this._isCtrlBackspace(e)) {
-      this.currentWord.querySelectorAll(".letter").forEach(_el => {
-        console.log(_el, "==_el==");
-        this._removeClass(_el, ["current", "correct", "incorrect"]);
-      });
-      const previousWord = this.currentWord.previousElementSibling;
-
-      // check is there is previous word
-
-      if (previousWord) {
-        this._removeClass(this.currentWord, ["current"]);
-        this._addClass(previousWord, ["current"]);
-        this._addClass(previousWord.lastElementChild, ["current"]);
-      } else {
-        this._addClass(this.currentWord.firstElementChild, ["current"]);
-      }
-
+      this._handleCtrlBackspace();
       return;
     }
 
     if (isLetter && expectedLetter) {
-      if (this.currentLetter) {
-        this._addClass(
-          this.currentLetter,
-          key === expectedLetter ? ["correct"] : ["incorrect"]
-        );
-        this._removeClass(this.currentLetter, ["current"]);
-        this._addClass(this.currentLetter?.nextSibling, ["current"]);
-      }
+      this._handleLetterChecking(key, expectedLetter);
     }
 
     if (isSpaceKey) {
-      const lettersToMarkIncorrect = [
-        ...document.querySelectorAll(".word.current .letter:not(.correct)"),
-      ];
-      if (lettersToMarkIncorrect) {
-        lettersToMarkIncorrect.forEach(letter => {
-          this._addClass(letter, ["incorrect"]);
-        });
-      }
-
-      this._removeClass(this.currentWord, ["current"]);
-      this._removeClass(this.currentLetter, ["current"]);
-
-      this._addClass(this.currentWord.nextElementSibling, ["current"]);
-      this._addClass(this.currentWord.nextElementSibling.firstElementChild, [
-        "current",
-      ]);
+      this._handleSpaceKey();
     }
 
     if (isBackspace) {
-      // TODO: (Omkar) if all letters are correct for current word dont allow backspace
-
-      const isPreviousSiblingAvailable =
-        this.currentLetter?.previousElementSibling;
-      console.log(isPreviousSiblingAvailable, "==isPreviousSiblingAvailable==");
-
-      // const isPreviousSpace = this.currentLetter
-
-      if (isPreviousSiblingAvailable) {
-        this._removeClass(this.currentLetter, [
-          "correct",
-          "incorrect",
-          "current",
-        ]);
-        this._addClass(this.currentLetter.previousElementSibling, ["current"]);
-        this._removeClass(this.currentLetter.previousElementSibling, [
-          "correct",
-          "incorrect",
-        ]);
-        return;
-      }
-
-      const previousWord = this.currentWord.previousElementSibling;
-      console.log(previousWord, "==previousWord==");
-      if (previousWord) {
-        this._removeClass(this.currentWord, ["current"]);
-        this._removeClass(this.currentLetter, [
-          "current",
-          "correct",
-          "incorrect",
-        ]);
-
-        this._addClass(previousWord, ["current"]);
-        this._addClass(previousWord.lastElementChild, ["current"]);
-        this._removeClass(previousWord.lastElementChild, [
-          "correct",
-          "incorrect",
-        ]);
-      }
+      this._handleBackspacKey();
     }
   }
 }
